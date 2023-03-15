@@ -63,7 +63,9 @@ namespace From_Page_1
         }
         static void Main(string[] args)
             {
-            Console.WriteLine("Справочник «Сотрудники» \n Нажмите 1 - для просмотра сотрудников\n Нажмите 2 - для добавления нового сотрудника\n нажмите 3 - Для выхода из программы нажмите");
+            Console.WriteLine("Справочник «Сотрудники» \n Нажмите 1 - для просмотра сотрудников\n" +
+                " Нажмите 2 - для добавления нового сотрудника\n" +
+                " нажмите 3 - Для выхода из программы");
             while (true)
             {
                 string chose = Console.ReadLine();
@@ -71,24 +73,19 @@ namespace From_Page_1
                 {
                     ReadF();
                 }
-            else if (chose == "2") 
+                else if (chose == "2") 
                 {
                     WriteF();
                 }
-            else if (chose == "3")
+                else if (chose == "3")
                 {
                     break;
                 }
-            else 
+                else 
                 {
                     Console.WriteLine("Не верный выбор попробуйте еще раз:");
                 }
             }
-            
-            /*
-             * метод 1.
-             * создание метода для чтения файла
-             */
             }
         }
     }
