@@ -8,8 +8,6 @@ namespace Homework_06
 {
     class Program
     {
-        static void Main(string[] args)
-        {
 
             /// Домашнее задание
             ///
@@ -70,6 +68,8 @@ namespace Homework_06
             /// * При выполнении текущего задания, необходимо документировать код 
             ///   Как пометками, так и xml документацией
             ///   В обязательном порядке создать несколько собственных методов
+        static void Main(string[] args)
+        {
 
         }
     }
