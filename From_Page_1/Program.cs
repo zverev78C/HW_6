@@ -75,7 +75,6 @@ namespace From_Page_1
             Console.WriteLine("Для продожения нажмите любую кнопку...");
             Console.ReadKey();
         }
-
         static void WriteF(string fileName) //метод для записи файла
         {
             // часть первая считать файл для получения значения очередного номера записи
