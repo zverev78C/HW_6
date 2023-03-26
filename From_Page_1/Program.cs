@@ -107,8 +107,6 @@ namespace From_Page_1
             string fileName = "list.csv"; // расположение файла
             int count = 0;
 
-            // необходимо считать файл и из последней строки вынуть номер по порядку
-           // StreamReader.
             while (true)
             {
             Console.WriteLine("Справочник «Сотрудники» \n Нажмите 1 - для просмотра сотрудников\n" +
