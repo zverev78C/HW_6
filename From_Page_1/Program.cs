@@ -74,7 +74,6 @@ namespace From_Page_1
             Console.WriteLine();
             Console.WriteLine("Для продожения нажмите любую кнопку...");
             Console.ReadKey();
-
         }
 
         static void WriteF(string fileName) //метод для записи файла
@@ -115,14 +114,11 @@ namespace From_Page_1
         static void Main(string[] args)
             {
             string fileName = "list.csv"; // расположение файла
-            
-
             while (true)
             {
             Console.WriteLine("Справочник «Сотрудники» \n Нажмите 1 - для просмотра сотрудников\n" +
                 " Нажмите 2 - для добавления нового сотрудника\n" +
                 " нажмите 3 - Для выхода из программы");
-
                 string chose = Console.ReadLine();
                 if (chose == "1")
                 {
@@ -137,7 +133,6 @@ namespace From_Page_1
                 else if (chose == "3")
                 {
                     break;
-                    
                 }
                 else 
                 {
@@ -145,6 +140,6 @@ namespace From_Page_1
                     Console.Clear();
                 }
             }
-            }
         }
+    }
     }
