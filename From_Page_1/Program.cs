@@ -7,7 +7,8 @@ namespace From_Page_1
     //    Что нужно сделать
     //Создайте справочник «Сотрудники».
 
-    //Разработайте для предполагаемой компании программу, которая будет добавлять записи новых сотрудников в файл.Файл должен содержать следующие данные:
+    //Разработайте для предполагаемой компании программу, которая будет добавлять записи новых сотрудников в файл.
+    //Файл должен содержать следующие данные:
 
     //ID
     //Дату и время добавления записи
@@ -52,38 +53,88 @@ namespace From_Page_1
 
     internal class Program
         {
-        static void ReadF() //метод для чтения файла
+        static int ReadF(string fileName) //метод для чтения файла
         {
-            Console.WriteLine("Чтение файла");
+            Console.Clear();
+            string[] list;
+            using (StreamReader  sr = new StreamReader(fileName))
+            {
+                list = sr.ReadToEnd().Split('#');              
+            }
+            int count = ((list.Length+1)/7);
+            return count;
+            //string[,] wokers = new string[count, 7];
+
+            //int w = 0;
+            //for (int i = 0; i < count; i++)
+            //{
+            //    for (int j = 0; j < 7; j++)
+            //    {
+            //        //Console.WriteLine(w);
+            //        wokers[i, j] = w.ToString();
+            //        w++;
+            //    }
+            //}
+            //foreach (string str in wokers)
+            //{
+            //    Console.WriteLine(str);
+            //}
+            //Console.WriteLine($"{count}");
+
+            //Console.WriteLine("Для продолжения нажмите любую кнопку...");
+            //    Console.ReadKey();
         }
 
-        static void WriteF() //метод для записи файла
+        static void WriteF(int count, string pathFile) //метод для записи файла
         {
-            Console.WriteLine("Запись файла");
+            string line = $"{count+1}#{DateTime.Now}#{ask("Фаимилия Имя Отчество")}" +
+                $"#{ask("Возрост")}#{ask("Рост")}#{ask("Дата рождения")}#{ask("Место рождения")}";
+             string ask (string text)
+             {
+                Console.WriteLine (text);
+                return Console.ReadLine();
+             }
+
+            Console.WriteLine(line);
+            using (StreamWriter sw = new StreamWriter(pathFile, true))
+            {
+                sw.WriteLine(line);
+            }
+
         }
         static void Main(string[] args)
+            {
+            string fileName = "list.csv"; // расположение файла
+            int count = 0;
+
+            // необходимо считать файл и из последней строки вынуть номер по порядку
+           // StreamReader.
+            while (true)
             {
             Console.WriteLine("Справочник «Сотрудники» \n Нажмите 1 - для просмотра сотрудников\n" +
                 " Нажмите 2 - для добавления нового сотрудника\n" +
                 " нажмите 3 - Для выхода из программы");
-            while (true)
-            {
+
                 string chose = Console.ReadLine();
                 if (chose == "1")
                 {
-                    ReadF();
+                    count = ReadF(fileName);
+                    Console.Clear();
                 }
                 else if (chose == "2") 
                 {
-                    WriteF();
+                    WriteF(count, fileName);
+                    Console.Clear();
                 }
                 else if (chose == "3")
                 {
                     break;
+                    
                 }
                 else 
                 {
                     Console.WriteLine("Не верный выбор попробуйте еще раз:");
+                    Console.Clear();
                 }
             }
             }
