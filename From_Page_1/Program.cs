@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace From_Page_1
@@ -53,50 +54,44 @@ namespace From_Page_1
 
     internal class Program
         {
-        static int ReadF(string fileName) //метод для чтения файла
+        static void ReadF(string fileName) //метод для чтения файла
         {
             Console.Clear();
-            string[] list;
-            using (StreamReader  sr = new StreamReader(fileName))
+            string list;
+            using (StreamReader sr = new StreamReader(fileName))
             {
-                list = sr.ReadToEnd().Split('#');              
+                list = sr.ReadToEnd();
             }
-            int count = ((list.Length+1)/7);
-            return count;
-            //string[,] wokers = new string[count, 7];
+            list = list.Replace("#", " ");
+            Console.WriteLine(list);
+            Console.WriteLine();
+            Console.WriteLine("Для продожения нажмите любую кнопку...");
+            Console.ReadKey();
 
-            //int w = 0;
-            //for (int i = 0; i < count; i++)
-            //{
-            //    for (int j = 0; j < 7; j++)
-            //    {
-            //        //Console.WriteLine(w);
-            //        wokers[i, j] = w.ToString();
-            //        w++;
-            //    }
-            //}
-            //foreach (string str in wokers)
-            //{
-            //    Console.WriteLine(str);
-            //}
-            //Console.WriteLine($"{count}");
-
-            //Console.WriteLine("Для продолжения нажмите любую кнопку...");
-            //    Console.ReadKey();
         }
 
-        static void WriteF(int count, string pathFile) //метод для записи файла
+        static void WriteF(string fileName) //метод для записи файла
         {
+            // часть первая считать файл для получения значения очередного номера записи
+            string[] list;
+            using (StreamReader sr = new StreamReader(fileName))
+            {
+                list = sr.ReadToEnd().Split('#');
+            }
+            int count = ((list.Length + 1) / 7);
+
+            // часть вторая метода опрос пользователя и запись данных в файл
             string line = $"{count+1}#{DateTime.Now}#{ask("Фаимилия Имя Отчество")}" +
                 $"#{ask("Возрост")}#{ask("Рост")}#{ask("Дата рождения")}#{ask("Место рождения")}";
+
              string ask (string text)
              {
                 Console.WriteLine (text);
                 return Console.ReadLine();
-             }
+             } // внутрений метод для считывания данных пользователя
 
             Console.WriteLine(line);
-            using (StreamWriter sw = new StreamWriter(pathFile, true))
+            using (StreamWriter sw = new StreamWriter(fileName, true))
             {
                 sw.WriteLine(line);
             }
@@ -105,7 +100,7 @@ namespace From_Page_1
         static void Main(string[] args)
             {
             string fileName = "list.csv"; // расположение файла
-            int count = 0;
+            
 
             while (true)
             {
@@ -116,12 +111,12 @@ namespace From_Page_1
                 string chose = Console.ReadLine();
                 if (chose == "1")
                 {
-                    count = ReadF(fileName);
+                    ReadF(fileName);
                     Console.Clear();
                 }
                 else if (chose == "2") 
                 {
-                    WriteF(count, fileName);
+                    WriteF(fileName);
                     Console.Clear();
                 }
                 else if (chose == "3")
