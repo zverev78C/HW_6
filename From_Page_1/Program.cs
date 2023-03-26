@@ -58,12 +58,19 @@ namespace From_Page_1
         {
             Console.Clear();
             string list;
-            using (StreamReader sr = new StreamReader(fileName))
+            if (File.Exists(fileName))
+            {
+                using (StreamReader sr = new StreamReader(fileName))
             {
                 list = sr.ReadToEnd();
             }
             list = list.Replace("#", " ");
             Console.WriteLine(list);
+            }
+            else 
+            {
+                Console.WriteLine("Файл еще не существует, выберите создать первую запись ");
+            }
             Console.WriteLine();
             Console.WriteLine("Для продожения нажмите любую кнопку...");
             Console.ReadKey();
@@ -74,11 +81,19 @@ namespace From_Page_1
         {
             // часть первая считать файл для получения значения очередного номера записи
             string[] list;
+            int count;
+            if (File.Exists(fileName))
+            {
             using (StreamReader sr = new StreamReader(fileName))
             {
                 list = sr.ReadToEnd().Split('#');
             }
-            int count = ((list.Length + 1) / 7);
+            count = ((list.Length + 1) / 7);
+            }
+            else
+            {
+                count = 0;
+            }
 
             // часть вторая метода опрос пользователя и запись данных в файл
             string line = $"{count+1}#{DateTime.Now}#{ask("Фаимилия Имя Отчество")}" +
