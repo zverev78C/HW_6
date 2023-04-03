@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 
 namespace From_Page_1
-    {
+{
     #region
     //    Что нужно сделать
     //Создайте справочник «Сотрудники».
@@ -53,21 +53,25 @@ namespace From_Page_1
     #endregion
 
     internal class Program
-        {
-        static void ReadF(string fileName) //метод для чтения файла
+    {
+        /// <summary>
+        /// метод для чтения файла
+        /// </summary>
+        /// <param name="fileName"></param>
+        static void ReadF(string fileName)
         {
             Console.Clear();
             string list;
             if (File.Exists(fileName))
             {
                 using (StreamReader sr = new StreamReader(fileName))
-            {
-                list = sr.ReadToEnd();
+                {
+                    list = sr.ReadToEnd();
+                }
+                list = list.Replace("#", " ");
+                Console.WriteLine(list);
             }
-            list = list.Replace("#", " ");
-            Console.WriteLine(list);
-            }
-            else 
+            else
             {
                 Console.WriteLine("Файл еще не существует, выберите создать первую запись ");
             }
@@ -75,18 +79,22 @@ namespace From_Page_1
             Console.WriteLine("Для продожения нажмите любую кнопку...");
             Console.ReadKey();
         }
-        static void WriteF(string fileName) //метод для записи файла
+        /// <summary>
+        /// метод для записи файла
+        /// </summary>
+        /// <param name="fileName"></param>
+        static void WriteF(string fileName)
         {
             // часть первая считать файл для получения значения очередного номера записи
             string[] list;
             int count;
             if (File.Exists(fileName))
             {
-            using (StreamReader sr = new StreamReader(fileName))
-            {
-                list = sr.ReadToEnd().Split('#');
-            }
-            count = ((list.Length + 1) / 7);
+                using (StreamReader sr = new StreamReader(fileName))
+                {
+                    list = sr.ReadToEnd().Split('#');
+                }
+                count = ((list.Length + 1) / 7);
             }
             else
             {
@@ -94,14 +102,14 @@ namespace From_Page_1
             }
 
             // часть вторая метода опрос пользователя и запись данных в файл
-            string line = $"{count+1}#{DateTime.Now}#{ask("Фаимилия Имя Отчество")}" +
+            string line = $"{count + 1}#{DateTime.Now}#{ask("Фаимилия Имя Отчество")}" +
                 $"#{ask("Возрост")}#{ask("Рост")}#{ask("Дата рождения")}#{ask("Место рождения")}";
 
-             string ask (string text)
-             {
-                Console.WriteLine (text);
+            string ask(string text)
+            {
+                Console.WriteLine(text);
                 return Console.ReadLine();
-             } // внутрений метод для считывания данных пользователя
+            } // внутрений метод для считывания данных пользователя
 
             Console.WriteLine(line);
             using (StreamWriter sw = new StreamWriter(fileName, true))
@@ -111,20 +119,20 @@ namespace From_Page_1
 
         }
         static void Main(string[] args)
-            {
+        {
             string fileName = "list.csv"; // расположение файла
             while (true)
             {
-            Console.WriteLine("Справочник «Сотрудники» \n Нажмите 1 - для просмотра сотрудников\n" +
-                " Нажмите 2 - для добавления нового сотрудника\n" +
-                " нажмите 3 - Для выхода из программы");
+                Console.WriteLine("Справочник «Сотрудники» \n Нажмите 1 - для просмотра сотрудников\n" +
+                    " Нажмите 2 - для добавления нового сотрудника\n" +
+                    " нажмите 3 - Для выхода из программы");
                 string chose = Console.ReadLine();
                 if (chose == "1")
                 {
                     ReadF(fileName);
                     Console.Clear();
                 }
-                else if (chose == "2") 
+                else if (chose == "2")
                 {
                     WriteF(fileName);
                     Console.Clear();
@@ -133,7 +141,7 @@ namespace From_Page_1
                 {
                     break;
                 }
-                else 
+                else
                 {
                     Console.WriteLine("Не верный выбор попробуйте еще раз:");
                     Console.Clear();
@@ -141,4 +149,4 @@ namespace From_Page_1
             }
         }
     }
-    }
+}
