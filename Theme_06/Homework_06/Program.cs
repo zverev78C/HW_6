@@ -108,12 +108,12 @@ namespace Homework_06
                                     {
                                         FW(line, fileName);
                                         line = "";
-                                        line = line + $"{i} ";
+                                        line += $"{i} ";
                                         n *= 2;
                                     }
                                     else
                                     {
-                                        line = line + $"{i} ";
+                                        line += $"{i} ";
                                     }
                                 }
                                 FW(line, fileName);
@@ -196,7 +196,6 @@ class BadSolution
 {
     static void BadProg()
     {
-        int N; // временное задание числа
         DateTime date = DateTime.Now;
         int grCount = 1; //  переменная для создания массива  mass
         while (true) // основной цикл программы
@@ -205,7 +204,7 @@ class BadSolution
             string path = Console.ReadLine();
             if (File.Exists(path)) // программа продолжает выполняться если файл существует
             {
-                Int32.TryParse(FR(path), out N);
+                Int32.TryParse(FR(path), out int N);
                 if (0 < N && N < 1_000_000_000)
                 {
                     int[][] groups = new int[grCount][]; // массив mass для хранения груп чисел
