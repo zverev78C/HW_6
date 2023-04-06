@@ -3,7 +3,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Text;
 
-namespace test
+namespace HW_6
 {
     internal class Program
     {
@@ -147,12 +147,11 @@ namespace test
             {
                 Console.WriteLine("Введите путь к файлу с числом:\n");
                 string pathFile = Console.ReadLine();
-                int N = 0;
                 string line;
                 if (File.Exists(pathFile))
                 {
                     using (StreamReader sr = new StreamReader(pathFile)) { line = sr.ReadToEnd(); }
-                    if (Int32.TryParse(line, out N))
+                    if (Int32.TryParse(line, out int N))
                     {
                         if (0 < N && N < 1_000_000_001) { return (pathFile, N); }
                     }

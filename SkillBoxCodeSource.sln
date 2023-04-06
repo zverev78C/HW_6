@@ -315,7 +315,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example_610_Intro", "Theme_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "From_Page_1", "From_Page_1\From_Page_1.csproj", "{472EB83D-BBC6-4184-A378-5756516A2F10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{5D21D390-3F82-41FD-9922-469BE6C4CE71}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HW_6", "test\HW_6.csproj", "{5D21D390-3F82-41FD-9922-469BE6C4CE71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
