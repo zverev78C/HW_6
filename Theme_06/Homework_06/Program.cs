@@ -71,11 +71,12 @@ namespace Homework_06
             while (p) // основной цикл программы
             {
                 Console.WriteLine("Что бы узнать количество групп нажмите - 1.\nЧто бы создать файл с группами нажмите - 2.\nДля выхода нажмите - 3.\n");
+                string pathFile = ""; // Переменнная для указания пути к файлу
                 switch (Console.ReadLine())
                 {
                     case "1": // выбор показать только кол-во групп
                         {
-                            Int32.TryParse(FR(), out int N); // проверка на наличие файла
+                            Int32.TryParse(FR(pathFile), out int N); // проверка на наличие файла
                             if (0 < N && N < 1_000_000_001)
                             {
                                 DateTime start = DateTime.Now;
@@ -93,7 +94,7 @@ namespace Homework_06
                         }
                     case "2": // выбор с отображением и возможностью архивации
                         {
-                            Int32.TryParse(FR(), out int N); // проверка на наличие файла
+                            Int32.TryParse(FR(pathFile), out int N); // проверка на наличие файла
                             //int N = int.Parse(Console.ReadLine()); // Временная строка для ввода N
                             if (0 < N && N < 1_000_000_001)
                             {
@@ -130,31 +131,30 @@ namespace Homework_06
                 }
             }
         }
-
+        //private static string PathFile()
+        //{
+        //    Console.WriteLine("Введите путь к файлу с числом:");
+        //    string pathFile = Console.ReadLine();// ввод пути к файлу
+        //    if (File.Exists(pathFile)) { return pathFile; }
+        //}
         /// <summary>
         /// метод записи строки в файл
         /// </summary>
-        /// <param name="message"></param>
-        /// <param name="fileName"></param>
-        public static void FW(string message, string fileName)
+        /// <param name="message">что записать</param>
+        /// <param name="pathFile">куда записать</param>
+        public static void FW(string message, string pathFile)
         {
-            using (StreamWriter sw = new StreamWriter(fileName, true)) { sw.WriteLine(message); }
+            using (StreamWriter sw = new StreamWriter(pathFile, true)) { sw.WriteLine(message); }
         }
         /// <summary>
         /// метод для считывания файла
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="pathFile">откуда считать</param>
         /// <returns></returns>
-        public static string FR()
+        public static string FR(string pathFile)
         {
-            string line = "";
-            while (true)
-            {
-                Console.WriteLine("Введите путь к файлу с числом:"); string pathFile = Console.ReadLine();// ввод пути к файлу
-                if (File.Exists(pathFile))
-                { using (StreamReader sr = new StreamReader(pathFile)) { line = sr.ReadToEnd(); } break; }
-            }
-            return line;
+            string line;
+            using (StreamReader sr = new StreamReader(pathFile)) {return line = sr.ReadToEnd(); }
         }
         /// <summary>
         /// Метод для ответа на ошибки ввода
