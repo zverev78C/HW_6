@@ -5,7 +5,7 @@ using System.IO.Compression;
 namespace Homework_06
 {
     class Program
-    { 
+    {
         /// Домашнее задание
         ///
         /// Группа начинающих программистов решила поучаствовать в хакатоне с целью демонстрации
@@ -100,9 +100,9 @@ namespace Homework_06
                                 //Console.WriteLine("Введите путь к файлу записи:\n");
                                 string fileName = "text.txt";//Console.ReadLine();
                                 int n = 2;
-                                string line="1";
+                                string line = "1";
                                 DateTime start = DateTime.Now;
-                                for (int i = 2; i < N+1; i++)
+                                for (int i = 2; i < N + 1; i++)
                                 {
                                     if (n == i)
                                     {
@@ -116,10 +116,11 @@ namespace Homework_06
                                         line += $"{i} ";
                                     }
                                 }
-                                FW(line, fileName);
+                                FW(line, fileName);// запись последней строки которая не достигла уровня n *= 2;
                                 DateTime end = DateTime.Now;
                                 string milliseconds = Math.Round(end.Subtract(start).TotalMilliseconds, 2).ToString();
                                 Console.WriteLine($"Потратил времени: {milliseconds} милисекунд");
+                                CompressZip();
                                 break;
                             }
                             else { EE("Число не входит в диапазон от 1 до 1 000 000 000"); break; }  // в файле не верная инфо
@@ -129,15 +130,15 @@ namespace Homework_06
                 }
             }
         }
+
         /// <summary>
         /// метод записи строки в файл
         /// </summary>
-        /// <param name="message">что записать</param>
-        /// <param name="fileName">куда записать</param>
-        /// <param name="Count">Сколько записано</param>
+        /// <param name="message"></param>
+        /// <param name="fileName"></param>
         public static void FW(string message, string fileName)
         {
-            using (StreamWriter sw = new StreamWriter(fileName, true)) {sw.WriteLine(message);}
+            using (StreamWriter sw = new StreamWriter(fileName, true)) { sw.WriteLine(message); }
         }
         /// <summary>
         /// метод для считывания файла
@@ -156,7 +157,7 @@ namespace Homework_06
             return line;
         }
         /// <summary>
-        /// Метод для ответа на ошики ввода
+        /// Метод для ответа на ошибки ввода
         /// </summary>
         /// <param name="message"></param>
         public static void EE(string message)
@@ -168,23 +169,34 @@ namespace Homework_06
         /// метод архивирования файла
         /// </summary>
         /// <param name="path"></param>
-        public static void CompressZip(string path)
+        public static void CompressZip()
         {
-            string compressed = @"D:\temp\file.zip";
+            bool zip = true;
+            while (zip)
 
-
-            using (FileStream fileStream = new FileStream(path, FileMode.OpenOrCreate))
+                Console.WriteLine("Хотите ли вы зарахивировать полученый файл с результатом?\n\nДа нажмите - Y.\nНет нажмите - N.");
+            switch (Console.ReadLine().ToLower())
             {
-                using (FileStream zipfileStream = File.Create(compressed))
-                {
-                    using (GZipStream gZipStream = new GZipStream(zipfileStream, CompressionMode.Compress))
+                case "y":
                     {
-                        fileStream.CopyTo(gZipStream);
-                        Console.WriteLine($"\nСжатие файла {path} завершено." +
-                            $"\n Размер файла иходного : {fileStream.Length} " +
-                            $"\n Размер файла сжатого :{zipfileStream.Length} ");
+                        string compressed = "file.zip";
+                        using (FileStream fileStream = new FileStream("file.zip", FileMode.OpenOrCreate))
+                        {
+                            using (FileStream zipfileStream = File.Create(compressed))
+                            {
+                                using (GZipStream gZipStream = new GZipStream(zipfileStream, CompressionMode.Compress))
+                                {
+                                    fileStream.CopyTo(gZipStream);
+                                    Console.WriteLine($"\nСжатие файла {"file.zip"} завершено." +
+                                        $"\n Размер файла иходного : {fileStream.Length} " +
+                                        $"\n Размер файла сжатого :{zipfileStream.Length} ");
+                                }
+                            }
+                        }
+                        break;
                     }
-                }
+                case ("n"): { zip = false; break; }
+                default: { Console.WriteLine("Выбор не понятеню"); break; }
             }
         }
     }
