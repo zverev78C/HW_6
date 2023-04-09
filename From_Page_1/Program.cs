@@ -118,6 +118,9 @@ namespace From_Page_1
             }
 
         }
+
+
+
         static void Main(string[] args)
         {
             string fileName = "list.csv"; // расположение файла
