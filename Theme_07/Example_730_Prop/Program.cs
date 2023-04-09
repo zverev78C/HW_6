@@ -56,10 +56,10 @@ namespace Example_731_Prop
 
             #endregion
 
-            Cat4 cat4 = new Cat4();
-            cat4.Nickname = "Барсик";
-            cat4.EyeColor = "Зеленые";
-            cat4.EyeColor = "Голубые";
+            //    Cat4 cat4 = new Cat4();
+            //    cat4.Nickname = "Барсик";
+            //    cat4.EyeColor = "Зеленые";
+            //    cat4.EyeColor = "Голубые";
         }
     }
 }

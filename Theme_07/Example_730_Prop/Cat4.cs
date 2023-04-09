@@ -11,11 +11,11 @@
         /// </summary>
         /// <param name="Breed">Порода</param>
         /// <param name="Nickname">Кличка</param>
-        public Cat4(string Breed, string Nickname)
-        {
-            this.breed = Breed;
-            this.nickname = Nickname;
-        }
+        //public Cat4(string Breed, string Nickname)
+        //{
+        //    this.breed = Breed;
+        //    this.nickname = Nickname;
+        //}
 
         /// <summary>
         /// Кличка
