@@ -243,3 +243,8 @@ namespace FromPage_7
     }
 }
 
+struct Worker
+{
+
+}
+
