@@ -9,7 +9,7 @@ namespace Example_710_Intro
     /// <summary>
     /// Собака
     /// </summary>
-    struct Dog
+    public struct Dog
     {
         /// <summary>
         /// Кличка
