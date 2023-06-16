@@ -46,6 +46,28 @@ namespace FromPage_7
         public string PlaceOfBirth { get; set; }
         #endregion
 
+        #region Конструктор
+        /// <summary>
+        /// Создание сотрудника
+        /// </summary>
+        /// <param name="id">индекс записи</param>
+        /// <param name="dateTime">время добавления записи</param>
+        /// <param name="fio">Ф.И.О. сотрудника</param>
+        /// <param name="yearsOld">Возраст</param>
+        /// <param name="height">Вес</param>
+        /// <param name="dob">Дата рождения</param>
+        /// <param name="pob">Место рождения</param>
+        public Worker(int id, DateTime dateTime, string fio, DateTime yearsOld, int height, DateTime dob, string pob)
+        {
+            this.Id = id;
+            this.DateTime = dateTime;
+            this.Fio = fio;
+            this.YearsOld = yearsOld;   
+            this.Height = height;
+            this.DateOfBirth = dob;
+            this.PlaceOfBirth = pob;
+        }
 
+        #endregion
     }
 }
