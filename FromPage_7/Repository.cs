@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,12 +33,30 @@ namespace FromPage_7
         //          2#15.12.2021 03:12#Алексеев Алексей Иванович#24#176#05.11.1980#город Томск
         #endregion
 
-        public Worker[] GetAllWorkers()
-        {
-            Worker allworkers = new Worker();
-            // здесь происходит чтение из файла
-            return [] allwokers;// и возврат массива считанных экземпляров
-        }
+        //public Worker[] GetAllWorkers()
+        //{
+        //    //public Worker[] GetAllWorkers()
+        ////         {
+        ////                // здесь происходит чтение из файла
+        ////                // и возврат массива считанных экземпляров
+        ////         }
+        //    string[] list;
+        //    int count;
+        //    if (File.Exists(fileName))
+        //    {
+        //        using (StreamReader sr = new StreamReader(fileName))
+        //        {
+        //            list = sr.ReadToEnd().Split('#');
+        //        }
+        //        count = ((list.Length + 1) / 7);
+        //    }
+        //    else
+        //    {
+        //        count = 0;
+        //    }
+
+
+        //}
 
         //            public Worker GetWorkerById(int id)
         //         {

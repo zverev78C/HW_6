@@ -13,11 +13,8 @@ namespace Example_751
     struct Repository
     {
         private Worker[] workers; // Основной массив для хранения данных
-
         private string path; // путь к файлу с данными
-        
         int index; // текущий элемент для добавления в workers
-
         string[] titles; // массив, храняий заголовки полей. используется в PrintDbToConsole
 
         /// <summary>
