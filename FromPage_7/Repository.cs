@@ -33,6 +33,20 @@ namespace FromPage_7
         //          2#15.12.2021 03:12#Алексеев Алексей Иванович#24#176#05.11.1980#город Томск
         #endregion
 
+        private static string[] titles = { "ID", "Время создания записи", "Ф.И.О.", "Возраст", "Рост", "Дата Рождения", "Место Рождения" }; // массив для хранения заголовков
+
+        /// <summary>
+        /// Метод для создания файла и записи заголовков 
+        /// </summary>
+        /// <param name="fileName">расположение файла</param>
+        public static void FirstLaunchProgramm(string fileName)
+        {
+            using (StreamWriter sw = new StreamWriter(fileName, true, System.Text.Encoding.Default))
+            {
+                sw.WriteLine($"{titles[0]}#{titles[1]}#{titles[2]}#{titles[3]}#{titles[4]}#{titles[5]}#{titles[6]}");
+            }
+        }
+      
         //public Worker[] GetAllWorkers()
         //{
         //    //public Worker[] GetAllWorkers()

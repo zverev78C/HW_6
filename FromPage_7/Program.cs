@@ -106,12 +106,9 @@ namespace FromPage_7
             bool flag = true; // Переменная для закрытия программы
 
             // Проверка на наличие файла
-            if (File.Exists(fileName) == false) // если файл есть то переходим к основному алгаритму
+            if (File.Exists(fileName) == false) // если файла не существует то создаем его с заголовками
             {
-                using (StreamWriter sw = new StreamWriter(fileName, true, System.Text.Encoding.Default))
-                {
-                    sw.WriteLine($"ID, #Время создания записи, #Ф.И.О., #Возраст#Рост, #Дата Рождения, #Место Рождения");
-                }
+                Repository.FirstLaunchProgramm(fileName);
             }
            
             while (flag == true)
