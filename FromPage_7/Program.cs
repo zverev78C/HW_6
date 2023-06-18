@@ -103,46 +103,44 @@ namespace FromPage_7
         static void Main(string[] args)
         {
             string fileName = "list.csv"; // расположение файла
-            bool flag = true;
+            bool flag = true; // Переменная для закрытия программы
 
             // Проверка на наличие файла
-            if (File.Exists(fileName)) // если файл есть то переходим к основному алгаритму
+            if (File.Exists(fileName) == false) // если файл есть то переходим к основному алгаритму
             {
-                while (flag == true)
+                using (StreamWriter sw = new StreamWriter(fileName, true, System.Text.Encoding.Default))
                 {
-                    Console.WriteLine("Справочник «Сотрудники» \n" +
-                        " Нажмите 1 - для просмотра сотрудников\n" +
-                        " Нажмите 2 - для добавления нового сотрудника\n" +
-                        " Нажмите 3 - для выхода из программы");
-                    switch (Console.ReadLine())
-                    {
-                        case "1": // выбор просмотра списка сотрудников
-                        {
-                                break;
-                        }
-                        case "2":// выбор добавления сотрудника в список
-                        {
-                                break;
-                        }
-                        case "3": //выход из программы
-                        {
-                                flag = false;
-                                break;
-                        }
-                        default:
-                        {
-                                Console.WriteLine("Не верный выбор попробуйте еще раз:");
-                                Console.Clear();
-                                break;
-                        }
-                    }
+                    sw.WriteLine($"ID, #Время создания записи, #Ф.И.О., #Возраст#Рост, #Дата Рождения, #Место Рождения");
                 }
             }
-            else // если файла нет то создаем его и записываем заголовки
+           
+            while (flag == true)
             {
-                using (StreamWriter sw = new StreamWriter(fileName, true))
+                Console.WriteLine("Справочник «Сотрудники» \n" +
+                    " Нажмите 1 - для просмотра сотрудников\n" +
+                    " Нажмите 2 - для добавления нового сотрудника\n" +
+                    " Нажмите 3 - для выхода из программы");
+                switch (Console.ReadLine())
                 {
-                    sw.WriteLine($"ID#Время создания записи#Ф.И.О.#Возраст#Рост#Дата Рождения#Место Рождения");
+                    case "1": // выбор просмотра списка сотрудников
+                        {
+                            break;
+                        }
+                    case "2":// выбор добавления сотрудника в список
+                        {
+                            break;
+                        }
+                    case "3": //выход из программы
+                        {
+                            flag = false;
+                            break;
+                        }
+                    default:
+                        {
+                            Console.WriteLine("Не верный выбор попробуйте еще раз:");
+                            Console.Clear();
+                            break;
+                        }
                 }
             }
         }
