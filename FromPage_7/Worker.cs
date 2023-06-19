@@ -18,7 +18,7 @@ namespace FromPage_7
         /// <summary>
         /// Дата и время добавления записи
         /// </summary>
-        public DateTime DateTime { get; set; }
+        public DateTime DateTime { get; set; } // 
 
         /// <summary>
         /// ФИО работника
@@ -28,7 +28,7 @@ namespace FromPage_7
         /// <summary>
         /// Возраст
         /// </summary>
-        public DateTime YearsOld { get; private set; }
+        public TimeSpan YearsOld { get; set; } // сделать только для вывода в консоль
 
         /// <summary>
         /// Рост сотрудника
@@ -60,9 +60,9 @@ namespace FromPage_7
         public Worker(int id, DateTime dateTime, string fio, DateTime yearsOld, int height, DateTime dob, string pob)
         {
             this.Id = id;
-            this.DateTime = dateTime;
+            this.DateTime = DateTime.Now;
             this.Fio = fio;
-            this.YearsOld = yearsOld;   
+            this.YearsOld = dateTime - dob;   
             this.Height = height;
             this.DateOfBirth = dob;
             this.PlaceOfBirth = pob;

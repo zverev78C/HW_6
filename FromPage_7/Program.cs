@@ -98,17 +98,17 @@ namespace FromPage_7
 
         #endregion
 
-
-
         static void Main(string[] args)
         {
             string fileName = "list.csv"; // расположение файла
             bool flag = true; // Переменная для закрытия программы
 
+            Repository rep = new Repository();
+
             // Проверка на наличие файла
             if (File.Exists(fileName) == false) // если файла не существует то создаем его с заголовками
             {
-                Repository.FirstLaunchProgramm(fileName);
+                rep.FirstLaunchProgramm(fileName);
             }
            
             while (flag == true)
@@ -121,13 +121,14 @@ namespace FromPage_7
                 {
                     case "1": // выбор просмотра списка сотрудников
                         {
+                            rep.PrintTitles();
                             break;
                         }
                     case "2":// выбор добавления сотрудника в список
                         {
                             break;
                         }
-                    case "3": //выход из программы
+                    case "3": //выход из программы 
                         {
                             flag = false;
                             break;

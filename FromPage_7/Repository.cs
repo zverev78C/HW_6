@@ -33,18 +33,29 @@ namespace FromPage_7
         //          2#15.12.2021 03:12#Алексеев Алексей Иванович#24#176#05.11.1980#город Томск
         #endregion
 
-        private static string[] titles = { "ID", "Время создания записи", "Ф.И.О.", "Возраст", "Рост", "Дата Рождения", "Место Рождения" }; // массив для хранения заголовков
+        string[] titles = {"ID","Время создания записи","Фамилия И.О.","Возраст","Рост","Дата Рождения","Место Рождения"}; // массив для хранения заголовков
 
         /// <summary>
         /// Метод для создания файла и записи заголовков 
         /// </summary>
         /// <param name="fileName">расположение файла</param>
-        public static void FirstLaunchProgramm(string fileName)
+        public void FirstLaunchProgramm(string fileName)
         {
             using (StreamWriter sw = new StreamWriter(fileName, true, System.Text.Encoding.Default))
             {
-                sw.WriteLine($"{titles[0]}#{titles[1]}#{titles[2]}#{titles[3]}#{titles[4]}#{titles[5]}#{titles[6]}");
+                sw.WriteLine($"{this.titles[0]}#{this.titles[1]}#{this.titles[2]}#{this.titles[4]}#{this.titles[5]}#{this.titles[6]}");
             }
+        }
+
+        /// <summary>
+        /// Временный метод для контроля вывода в консоль
+        /// </summary>
+        public void PrintTitles()
+        {
+            Console.Clear();
+            Console.Write($"{this.titles[0],5}|{this.titles[1],22}|{this.titles[2],15}|{this.titles[3],4}|{this.titles[4],4}|{this.titles[5],15}|{this.titles[6],15}");
+
+            Console.ReadKey();
         }
       
         //public Worker[] GetAllWorkers()
