@@ -108,9 +108,10 @@ namespace FromPage_7
             // Проверка на наличие файла
             if (File.Exists(fileName) == false) // если файла не существует то создаем его с заголовками
             {
-                rep.FirstLaunchProgramm(fileName);
+                //File.Create(fileName);
+               rep.FirstLaunchProgramm(fileName);
             }
-           
+
             while (flag == true)
             {
                 Console.WriteLine("Справочник «Сотрудники» \n" +
@@ -121,7 +122,10 @@ namespace FromPage_7
                 {
                     case "1": // выбор просмотра списка сотрудников
                         {
-                            rep.PrintTitles();
+                            Worker [] workers = rep.GetAllWorkers(fileName);
+                            Print (workers);
+                            Console.ReadKey();
+
                             break;
                         }
                     case "2":// выбор добавления сотрудника в список
@@ -139,6 +143,21 @@ namespace FromPage_7
                             Console.Clear();
                             break;
                         }
+                }
+            }
+        }
+
+        static void Print(Worker[] strings)
+        {
+            if (strings == null)
+            {
+                Console.WriteLine("Файл пуст");
+            }
+            else 
+            {
+                foreach (Worker s in strings)
+                {
+                    Console.WriteLine(strings);
                 }
             }
         }

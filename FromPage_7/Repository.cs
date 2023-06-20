@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace FromPage_7
 {
-     class Repository
+    class Repository
     {
         #region что нужно сделать
 
@@ -33,7 +34,11 @@ namespace FromPage_7
         //          2#15.12.2021 03:12#Алексеев Алексей Иванович#24#176#05.11.1980#город Томск
         #endregion
 
-        string[] titles = {"ID","Время создания записи","Фамилия И.О.","Возраст","Рост","Дата Рождения","Место Рождения"}; // массив для хранения заголовков
+        string[] titles = { "ID", "Время создания записи", "Фамилия И.О.", "Возраст", "Рост", "Дата Рождения", "Место Рождения" }; // массив для хранения заголовков
+        private Worker[] workers;  // основной массив данных о сотрудниках
+        private int count;
+        // string fileName;
+
 
         /// <summary>
         /// Метод для создания файла и записи заголовков 
@@ -41,10 +46,7 @@ namespace FromPage_7
         /// <param name="fileName">расположение файла</param>
         public void FirstLaunchProgramm(string fileName)
         {
-            using (StreamWriter sw = new StreamWriter(fileName, true, System.Text.Encoding.Default))
-            {
-                sw.WriteLine($"{this.titles[0]}#{this.titles[1]}#{this.titles[2]}#{this.titles[4]}#{this.titles[5]}#{this.titles[6]}");
-            }
+            using (StreamWriter sw = new StreamWriter(fileName, true)) ;
         }
 
         /// <summary>
@@ -57,32 +59,34 @@ namespace FromPage_7
 
             Console.ReadKey();
         }
-      
-        //public Worker[] GetAllWorkers()
-        //{
-        //    //public Worker[] GetAllWorkers()
-        ////         {
-        ////                // здесь происходит чтение из файла
-        ////                // и возврат массива считанных экземпляров
-        ////         }
-        //    string[] list;
-        //    int count;
-        //    if (File.Exists(fileName))
-        //    {
-        //        using (StreamReader sr = new StreamReader(fileName))
-        //        {
-        //            list = sr.ReadToEnd().Split('#');
-        //        }
-        //        count = ((list.Length + 1) / 7);
-        //    }
-        //    else
-        //    {
-        //        count = 0;
-        //    }
 
-
-        //}
-
+        /// <summary>
+        /// здесь происходит чтение из файла и возврат массива считанных экземпляров 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public Worker[] GetAllWorkers(string fileName)
+        {
+            using (StreamReader sr = new StreamReader(fileName))
+            {
+                while (!sr.EndOfStream)
+                {
+                    string[] args = sr.ReadLine().Split('#');                     
+                    Add(new Worker(Convert.ToInt32(args[0]), Convert.ToDateTime(args[1]), args[2], Convert.ToInt32(args[4]), Convert.ToDateTime(args[5]), args[6]));
+                }
+                return this.workers;
+            }
+        }
+        /// <summary>
+        /// Метод добавления сотрудника в хранилище
+        /// </summary>
+        /// <param name="ConcreteWorker">Сотрудник</param>
+        public void Add(Worker ConcreteWorker)
+        {
+            //this.Resize(count >= this.workers.Length);
+            this.workers[count] = ConcreteWorker;
+            this.count++;
+        }
         //            public Worker GetWorkerById(int id)
         //         {
         //                // происходит чтение из файла, возвращается Worker

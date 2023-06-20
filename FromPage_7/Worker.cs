@@ -57,15 +57,15 @@ namespace FromPage_7
         /// <param name="height">Вес</param>
         /// <param name="dob">Дата рождения</param>
         /// <param name="pob">Место рождения</param>
-        public Worker(int id, DateTime dateTime, string fio, DateTime yearsOld, int height, DateTime dob, string pob)
+        public Worker(int id, DateTime dateTime, string fio, int height, DateTime dob, string pob)
         {
             this.Id = id;
             this.DateTime = DateTime.Now;
             this.Fio = fio;
-            this.YearsOld = dateTime - dob;   
             this.Height = height;
             this.DateOfBirth = dob;
             this.PlaceOfBirth = pob;
+            this.YearsOld = dateTime - dob;   
         }
 
         #endregion
