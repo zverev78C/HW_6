@@ -57,15 +57,17 @@ namespace FromPage_7
         private string fileName;
         private int index; // до считывания файла счетчик записий равен нулю
         private Worker[] workers;  // основной массив данных о сотрудниках
-        private int id = 1; // переменная для присвоения ID новому сотруднику т.к. айди и номер записи со временем могут разойтись в значениях из-за удаления некоторых записий.  
         private string[] args;
+        private int id; // переменная для присвоения ID новому сотруднику т.к. айди и номер записи со временем могут разойтись в значениях из-за удаления некоторых записий.  
 
+        #region Конструктор
         public Repository(string fileName)
         {
             this.fileName = fileName;
-            //this.index = 0;
             this.workers = new Worker[1];
+
         }
+        #endregion
 
         #region готовые методы работы с базой 
 
@@ -131,15 +133,11 @@ namespace FromPage_7
                         Convert.ToDateTime(args[5]), // дата рождения
                         args[6] // место рождения
                         ));
+                    this.id = Convert.ToInt32(args[0]);
                 }
             }
             return this.workers;
         }
-        #endregion
-
-        #region методы для работы с базой 
-
-
 
         /// <summary>
         /// Метод добавления сотрудника в хранилище
@@ -155,6 +153,43 @@ namespace FromPage_7
             this.index++;
         }
 
+        /// <summary>
+        /// Метод добавления нового сотрудника. (надо доделать присвоение ID) 
+        /// </summary>
+        /// <param name="fileName"></param>
+        public void AddWorker()
+        {
+            this.id++;
+            this.args = new[] { "ID", "FIO", "Heght", "DateOfBirth", "PlaceOfBirth" };
+            args[0] = Convert.ToString(this.id);
+            Console.Write("Фамилия И.О. сотрудника:");
+            args[1] = Console.ReadLine();
+            Console.Write("Рост сотрудника:");
+            args[2] = Console.ReadLine();
+            Console.Write("Дата рождения сотрудника:");
+            args[3] = Console.ReadLine();
+            Console.Write("Место рождения сотрудника:");
+            args[4] = Console.ReadLine();
+
+            
+            string line = ($"{args[0]}#" +                  // ID
+                $"{DateTime.Now}#" +                        // Время добавления
+                $"{args[1]}#" +                             // ФИО
+                $"{Age(Convert.ToDateTime(args[3]))}#" +    // Возраст
+                $"{args[2]}#" +                             // вес
+                $"{args[3]}#" +                             // дата рождения
+                $"{args[4]}");                              // место рождения
+
+            using (StreamWriter sw = new StreamWriter(this.fileName, true))
+            {
+                sw.WriteLine(line);
+            }
+        }
+
+        #endregion
+
+        #region методы для работы с базой 
+
         //            public Worker GetWorkerById(int id)
         //         {
         //                // происходит чтение из файла, возвращается Worker
@@ -167,36 +202,6 @@ namespace FromPage_7
         //                // происходит запись в файл всех Worker,
         //                // кроме удаляемого
         //         }
-
-        public void AddWorker(string fileName)
-        {
-            this.args  = new [] { "ID", "FIO", "Heght", "DateOfBirth", "PlaceOfBirth" };
-            args[0] = "1";
-            Console.Write("Фамилия И.О. сотрудника:");
-            args[1] = Console.ReadLine();
-            Console.Write("Рост сотрудника:");
-            args[2] = Console.ReadLine();
-            Console.Write("Дата рождения сотрудника:");
-            args[3] = Console.ReadLine();
-            Console.Write("Место рождения сотрудника:");
-            args[4] = Console.ReadLine();
-
-            string line = ($"{args[0]}#" +                  // ID
-                $"{DateTime.Now}#" +                        // Время добавления
-                $"{args[1]}#" +                             // ФИО
-                $"{Age(Convert.ToDateTime(args[3]))}#" +    // Возраст
-                $"{args[2]}#" +                             // вес
-                $"{args[3]}#" +                             // дата рождения
-                $"{args[4]}");                              // место рождения
-
-            using (StreamWriter sw = new StreamWriter(fileName,true))
-            {
-                sw.WriteLine (line);                
-            }
-            // присваиваем worker уникальный ID,
-            // дописываем нового worker в файл
-        }
-
         //            public Worker[] GetWorkersBetweenTwoDates(DateTime dateFrom, DateTime dateTo)
         //         {
         //                // здесь происходит чтение из файла

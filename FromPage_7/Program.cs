@@ -104,36 +104,39 @@ namespace FromPage_7
             bool flag = true; // Переменная для закрытия программы
 
             Repository rep = new Repository(fileName); // инициализируем репозиторий для работы с базой данных
-
-            // Проверка на наличие файла
             if (File.Exists(fileName) == false) // если файла не существует то создаем его 
             {
                 rep.FirstLaunchProgramm();
             }
 
+            // Проверка на наличие файла
+
             while (flag == true)
             {
+                Worker[] workers = rep.GetAllWorkers();
                 Console.WriteLine("Справочник «Сотрудники» \n" +
                     " Нажмите 1 - для просмотра сотрудников\n" +
                     " Нажмите 2 - для добавления нового сотрудника\n" +
                     " Нажмите 3 - для выхода из программы");
-                
+
                 switch (Console.ReadLine())
                 {
-                    case "1": // выбор просмотра списка сотрудников
+                    // выбор просмотра списка сотрудников
+                    case "1":
                         Console.Clear();
                         rep.PrintTitles();
-                        Worker[] workers = rep.GetAllWorkers();
+                        workers = rep.GetAllWorkers();
                         rep.Print(workers);
                         Console.ReadKey();
                         break;
-
-                    case "2":// выбор добавления сотрудника в список
+                    // выбор добавления сотрудника в список
+                    case "2":
                         rep.PrintTitles();
                         rep.AddWorker();
+                        Console.Clear();
                         break;
-
-                    case "3": //выход из программы 
+                    //выход из программы 
+                    case "3":
                         flag = false;
                         break;
 
@@ -145,7 +148,7 @@ namespace FromPage_7
                 }
             }
         }
-        
+
     }
 }
 
