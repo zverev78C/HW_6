@@ -18,7 +18,7 @@ namespace FromPage_7
         /// <summary>
         /// Дата и время добавления записи
         /// </summary>
-        public DateTime DateTime { get; set; } // 
+        public DateTime DateTime { get; set; }
 
         /// <summary>
         /// ФИО работника
@@ -28,7 +28,7 @@ namespace FromPage_7
         /// <summary>
         /// Возраст
         /// </summary>
-        public TimeSpan YearsOld { get; set; } // сделать только для вывода в консоль
+        public int YearsOld { get; set; }
 
         /// <summary>
         /// Рост сотрудника
@@ -57,17 +57,26 @@ namespace FromPage_7
         /// <param name="height">Вес</param>
         /// <param name="dob">Дата рождения</param>
         /// <param name="pob">Место рождения</param>
-        public Worker(int id, DateTime dateTime, string fio, int height, DateTime dob, string pob)
+        public Worker(int id, DateTime dateTime, string fio, int yearsOld,  int height, DateTime dob, string pob)
         {
             this.Id = id;
-            this.DateTime = DateTime.Now;
+            this.DateTime = dateTime;
             this.Fio = fio;
+            this.YearsOld = yearsOld;   
             this.Height = height;
             this.DateOfBirth = dob;
             this.PlaceOfBirth = pob;
-            this.YearsOld = dateTime - dob;   
         }
 
         #endregion
+
+        /// <summary>
+        /// метод вывода данных о сотруднике 
+        /// </summary>
+        /// <returns></returns>
+        public string Print()
+        {
+            return $"{this.Id,4} {this.DateTime,23} {this.Fio,20} {this.YearsOld,8} {this.Height,8} {this.DateOfBirth.ToString("dd.MM.yyyy"),15} {this.PlaceOfBirth,15}";
+        }
     }
 }

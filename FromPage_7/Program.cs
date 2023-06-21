@@ -103,13 +103,12 @@ namespace FromPage_7
             string fileName = "list.csv"; // расположение файла
             bool flag = true; // Переменная для закрытия программы
 
-            Repository rep = new Repository();
+            Repository rep = new Repository(fileName); // инициализируем репозиторий для работы с базой данных
 
             // Проверка на наличие файла
-            if (File.Exists(fileName) == false) // если файла не существует то создаем его с заголовками
+            if (File.Exists(fileName) == false) // если файла не существует то создаем его 
             {
-                //File.Create(fileName);
-               rep.FirstLaunchProgramm(fileName);
+                rep.FirstLaunchProgramm();
             }
 
             while (flag == true)
@@ -118,49 +117,35 @@ namespace FromPage_7
                     " Нажмите 1 - для просмотра сотрудников\n" +
                     " Нажмите 2 - для добавления нового сотрудника\n" +
                     " Нажмите 3 - для выхода из программы");
+                
                 switch (Console.ReadLine())
                 {
                     case "1": // выбор просмотра списка сотрудников
-                        {
-                            Worker [] workers = rep.GetAllWorkers(fileName);
-                            Print (workers);
-                            Console.ReadKey();
+                        Console.Clear();
+                        rep.PrintTitles();
+                        Worker[] workers = rep.GetAllWorkers();
+                        rep.Print(workers);
+                        Console.ReadKey();
+                        break;
 
-                            break;
-                        }
                     case "2":// выбор добавления сотрудника в список
-                        {
-                            break;
-                        }
-                    case "3": //выход из программы 
-                        {
-                            flag = false;
-                            break;
-                        }
-                    default:
-                        {
-                            Console.WriteLine("Не верный выбор попробуйте еще раз:");
-                            Console.Clear();
-                            break;
-                        }
-                }
-            }
-        }
+                        rep.PrintTitles();
+                        rep.AddWorker(fileName);
+                        break;
 
-        static void Print(Worker[] strings)
-        {
-            if (strings == null)
-            {
-                Console.WriteLine("Файл пуст");
-            }
-            else 
-            {
-                foreach (Worker s in strings)
-                {
-                    Console.WriteLine(strings);
+                    case "3": //выход из программы 
+                        flag = false;
+                        break;
+
+                    default:
+                        Console.WriteLine("Не верный выбор попробуйте еще раз:");
+                        Console.ReadKey();
+                        Console.Clear();
+                        break;
                 }
             }
         }
+        
     }
 }
 

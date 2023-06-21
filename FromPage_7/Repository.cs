@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -34,58 +35,123 @@ namespace FromPage_7
         //          2#15.12.2021 03:12#Алексеев Алексей Иванович#24#176#05.11.1980#город Томск
         #endregion
 
-        string[] titles = { "ID", "Время создания записи", "Фамилия И.О.", "Возраст", "Рост", "Дата Рождения", "Место Рождения" }; // массив для хранения заголовков
-        private Worker[] workers;  // основной массив данных о сотрудниках
-        private int count;
-        // string fileName;
-
-
+        #region Заголовки
         /// <summary>
-        /// Метод для создания файла и записи заголовков 
-        /// </summary>
-        /// <param name="fileName">расположение файла</param>
-        public void FirstLaunchProgramm(string fileName)
-        {
-            using (StreamWriter sw = new StreamWriter(fileName, true)) ;
-        }
-
-        /// <summary>
-        /// Временный метод для контроля вывода в консоль
+        /// Метод для выведения заголовков в консоль
         /// </summary>
         public void PrintTitles()
         {
-            Console.Clear();
-            Console.Write($"{this.titles[0],5}|{this.titles[1],22}|{this.titles[2],15}|{this.titles[3],4}|{this.titles[4],4}|{this.titles[5],15}|{this.titles[6],15}");
+            string [] Titles = new string [7];
+            Titles[0] = "ID";
+            Titles[1] = "Время создания записи";
+            Titles[2] = "Фамилия И.О.";
+            Titles[3] = "Возраст";
+            Titles[4] = "Рост";
+            Titles[5] = "Дата Рождения";
+            Titles[6] = "Место Рождения";
 
-            Console.ReadKey();
+            Console.WriteLine($"{Titles[0],4} {Titles[1],23} {Titles[2],20} {Titles[3],8} {Titles[4],8} {Titles[5],15} {Titles[6],15}");
         }
+        #endregion 
+
+        private string fileName;
+        private int index; // до считывания файла счетчик записий равен нулю
+        private Worker[] workers;  // основной массив данных о сотрудниках
+        private int id = 1; // переменная для присвоения ID новому сотруднику т.к. айди и номер записи со временем могут разойтись в значениях из-за удаления некоторых записий.  
+        private string[] args;
+
+        public Repository(string fileName)
+        {
+            this.fileName = fileName;
+            this.index = 0;
+            this.workers = new Worker[1];
+        }
+
+        #region готовые методы работы с базой 
+
+        /// <summary>
+        /// Метод для создания файла 
+        /// </summary>
+        /// <param name="fileName">расположение файла</param>
+        public void FirstLaunchProgramm()
+        {
+            using (StreamWriter sw = new StreamWriter(this.fileName, true)) { };
+        }
+
+        /// <summary>
+        /// Метод для вывода всей базы сотрудников в консоль
+        /// </summary>
+        /// <param name="strings">массив сотрудников</param>
+        public void Print(Worker[] strings)
+        {
+            if (strings == null) // проверка ну пустую базу сотрудников при выводе в консоль
+            {
+                Console.WriteLine("Файл пуст");
+            }
+            else
+            {
+                for (int i = 0; i < index; i++)
+                {
+                    Console.WriteLine(this.workers[i].Print());
+                }
+            }
+        }
+
+        /// <summary>
+        /// Метод для определения возроста сотрудника
+        /// </summary>
+        /// <param name="dateOfBirth">дата рождения</param>
+        /// <returns></returns>
+        private int Age(DateTime dateOfBirth)
+        {
+            int age = DateTime.Now.Year - dateOfBirth.Year;
+            if (DateTime.Now.DayOfYear < dateOfBirth.DayOfYear) age--;
+            return age;
+        }
+
+        #endregion
+
+        #region методы для работы с базой 
 
         /// <summary>
         /// здесь происходит чтение из файла и возврат массива считанных экземпляров 
         /// </summary>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public Worker[] GetAllWorkers(string fileName)
+        public Worker[] GetAllWorkers()
         {
-            using (StreamReader sr = new StreamReader(fileName))
+            using (StreamReader sr = new StreamReader(this.fileName))
             {
+                index = 0; // пока не точно но кажется понадобиться
                 while (!sr.EndOfStream)
                 {
-                    string[] args = sr.ReadLine().Split('#');                     
-                    Add(new Worker(Convert.ToInt32(args[0]), Convert.ToDateTime(args[1]), args[2], Convert.ToInt32(args[4]), Convert.ToDateTime(args[5]), args[6]));
+                    args = sr.ReadLine().Split('#');
+                    Add(new Worker
+                        (Convert.ToInt32(args[0]), //id
+                        Convert.ToDateTime(args[1]), // Время добавления
+                        args[2], // ФИО
+                        Age(Convert.ToDateTime(args[5])), // Возраст
+                        Convert.ToInt32(args[4]), // вес
+                        Convert.ToDateTime(args[5]), // дата рождения
+                        args[6] // место рождения
+                        ));
                 }
-                return this.workers;
             }
+                return this.workers;
         }
+
         /// <summary>
         /// Метод добавления сотрудника в хранилище
         /// </summary>
         /// <param name="ConcreteWorker">Сотрудник</param>
         public void Add(Worker ConcreteWorker)
         {
-            //this.Resize(count >= this.workers.Length);
-            this.workers[count] = ConcreteWorker;
-            this.count++;
+            if (index >= this.workers.Length)
+            {
+                Array.Resize(ref this.workers, this.workers.Length * 2);
+            }
+            this.workers[index] = ConcreteWorker;
+            this.index++;
         }
         //            public Worker GetWorkerById(int id)
         //         {
@@ -100,11 +166,34 @@ namespace FromPage_7
         //                // кроме удаляемого
         //         }
 
-        //            public void AddWorker(Worker worker)
-        //         {
-        //                // присваиваем worker уникальный ID,
-        //                // дописываем нового worker в файл
-        //         }
+        public void AddWorker(string fileName)
+        {
+            this.args  = new [] { "ID", "FIO", "Heght", "DateOfBirth", "PlaceOfBirth" };
+            args[0] = "1";
+            Console.Write("Фамилия И.О. сотрудника:");
+            args[1] = Console.ReadLine();
+            Console.Write("Рост сотрудника:");
+            args[2] = Console.ReadLine();
+            Console.Write("Дата рождения сотрудника:");
+            args[3] = Console.ReadLine();
+            Console.Write("Место рождения сотрудника:");
+            args[4] = Console.ReadLine();
+
+            string line = ($"{args[0]}#" +                  // ID
+                $"{DateTime.Now}#" +                        // Время добавления
+                $"{args[1]}#" +                             // ФИО
+                $"{Age(Convert.ToDateTime(args[3]))}#" +    // Возраст
+                $"{args[2]}#" +                             // вес
+                $"{args[3]}#" +                             // дата рождения
+                $"{args[4]}");                              // место рождения
+
+            using (StreamWriter sw = new StreamWriter(fileName))
+            {
+                sw.WriteLine (line);                
+            }
+            // присваиваем worker уникальный ID,
+            // дописываем нового worker в файл
+        }
 
         //            public Worker[] GetWorkersBetweenTwoDates(DateTime dateFrom, DateTime dateTo)
         //         {
@@ -112,5 +201,10 @@ namespace FromPage_7
         //                // фильтрация нужных записей
         //                // и возврат массива считанных экземпляров
         //         }
+
+        #endregion
+
+
+
     }
 }
