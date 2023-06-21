@@ -130,7 +130,7 @@ namespace FromPage_7
 
                     case "2":// выбор добавления сотрудника в список
                         rep.PrintTitles();
-                        rep.AddWorker(fileName);
+                        rep.AddWorker();
                         break;
 
                     case "3": //выход из программы 

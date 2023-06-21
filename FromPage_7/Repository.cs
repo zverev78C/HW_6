@@ -63,7 +63,7 @@ namespace FromPage_7
         public Repository(string fileName)
         {
             this.fileName = fileName;
-            this.index = 0;
+            //this.index = 0;
             this.workers = new Worker[1];
         }
 
@@ -109,10 +109,6 @@ namespace FromPage_7
             return age;
         }
 
-        #endregion
-
-        #region методы для работы с базой 
-
         /// <summary>
         /// здесь происходит чтение из файла и возврат массива считанных экземпляров 
         /// </summary>
@@ -122,7 +118,7 @@ namespace FromPage_7
         {
             using (StreamReader sr = new StreamReader(this.fileName))
             {
-                index = 0; // пока не точно но кажется понадобиться
+                this.index = 0; // пока не точно но кажется понадобиться
                 while (!sr.EndOfStream)
                 {
                     args = sr.ReadLine().Split('#');
@@ -137,8 +133,13 @@ namespace FromPage_7
                         ));
                 }
             }
-                return this.workers;
+            return this.workers;
         }
+        #endregion
+
+        #region методы для работы с базой 
+
+
 
         /// <summary>
         /// Метод добавления сотрудника в хранилище
@@ -153,6 +154,7 @@ namespace FromPage_7
             this.workers[index] = ConcreteWorker;
             this.index++;
         }
+
         //            public Worker GetWorkerById(int id)
         //         {
         //                // происходит чтение из файла, возвращается Worker
@@ -187,7 +189,7 @@ namespace FromPage_7
                 $"{args[3]}#" +                             // дата рождения
                 $"{args[4]}");                              // место рождения
 
-            using (StreamWriter sw = new StreamWriter(fileName))
+            using (StreamWriter sw = new StreamWriter(fileName,true))
             {
                 sw.WriteLine (line);                
             }
