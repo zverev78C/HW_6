@@ -76,7 +76,7 @@ namespace FromPage_7
         /// <returns></returns>
         public string Print()
         {
-            return $"{this.Id,4} {this.DateTime,23} {this.Fio,20} {this.YearsOld,8} {this.Height,8} {this.DateOfBirth.ToString("dd.MM.yyyy"),15} {this.PlaceOfBirth,15}";
+            return $"{this.Id,4}\t {this.DateTime:F} {this.Fio,19} {this.YearsOld,8} {this.Height,8}\t   {this.DateOfBirth:dd.MM.yyyy} {this.PlaceOfBirth,15}";
         }
     }
 }

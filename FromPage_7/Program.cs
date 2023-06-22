@@ -102,18 +102,18 @@ namespace FromPage_7
         {
             string fileName = "list.csv"; // расположение файла
             bool flag = true; // Переменная для закрытия программы
-
             Repository rep = new Repository(fileName); // инициализируем репозиторий для работы с базой данных
+
+            // Проверка на наличие файла
             if (File.Exists(fileName) == false) // если файла не существует то создаем его 
             {
                 rep.FirstLaunchProgramm();
             }
 
-            // Проверка на наличие файла
-
             while (flag == true)
             {
-                Worker[] workers = rep.GetAllWorkers();
+                Worker[] workers = rep.GetAllWorkers(); // Заполнение массива из файла для определения актуального ID
+
                 Console.WriteLine("Справочник «Сотрудники» \n" +
                     " Нажмите 1 - для просмотра сотрудников\n" +
                     " Нажмите 2 - для добавления нового сотрудника\n" +

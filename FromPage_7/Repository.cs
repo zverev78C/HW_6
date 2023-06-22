@@ -50,14 +50,14 @@ namespace FromPage_7
             Titles[5] = "Дата Рождения";
             Titles[6] = "Место Рождения";
 
-            Console.WriteLine($"{Titles[0],4} {Titles[1],23} {Titles[2],20} {Titles[3],8} {Titles[4],8} {Titles[5],15} {Titles[6],15}");
+            Console.WriteLine($"{Titles[0],4}\t {Titles[1],23} {Titles[2],20} {Titles[3],8} {Titles[4],8} {Titles[5],15} {Titles[6],15}");
         }
         #endregion 
 
-        private string fileName;
+        private readonly string fileName; // расположение файла
         private int index; // до считывания файла счетчик записий равен нулю
         private Worker[] workers;  // основной массив данных о сотрудниках
-        private string[] args;
+        private string[] args; // массив для временных действий
         private int id; // переменная для присвоения ID новому сотруднику т.к. айди и номер записи со временем могут разойтись в значениях из-за удаления некоторых записий.  
 
         #region Конструктор
