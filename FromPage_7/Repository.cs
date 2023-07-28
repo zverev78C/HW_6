@@ -57,7 +57,7 @@ namespace FromPage_7
 
        
         private readonly string fileName; // расположение файла
-        private int index; // до считывания файла счетчик записий равен нулю
+        private int count; // до считывания файла счетчик записий равен нулю
         private Worker[] workers;  // основной массив данных о сотрудниках
         private string[] args; // массив для временных действий
         private int id; // переменная для присвоения ID новому сотруднику т.к. айди и номер записи со временем могут разойтись в значениях из-за удаления некоторых записий.  
@@ -94,7 +94,7 @@ namespace FromPage_7
             }
             else
             {
-                for (int i = 0; i < index; i++)
+                for (int i = 0; i < count; i++)
                 {
                     Console.WriteLine(this.workers[i].Print());
                 }
@@ -122,7 +122,7 @@ namespace FromPage_7
         {
             using (StreamReader sr = new StreamReader(this.fileName))
             {
-                this.index = 0; // пока не точно но кажется понадобиться
+                this.count = 0; // пока не точно но кажется понадобиться
                 while (!sr.EndOfStream)
                 {
                     args = sr.ReadLine().Split('#');
@@ -147,12 +147,12 @@ namespace FromPage_7
         /// <param name="ConcreteWorker">Сотрудник</param>
         public void Add(Worker ConcreteWorker)
         {
-            if (index >= this.workers.Length)
+            if (count >= this.workers.Length)
             {
                 Array.Resize(ref this.workers, this.workers.Length * 2);
             }
-            this.workers[index] = ConcreteWorker;
-            this.index++;
+            this.workers[count] = ConcreteWorker;
+            this.count++;
         }
 
         /// <summary>
@@ -161,7 +161,7 @@ namespace FromPage_7
         /// <param name="fileName"></param>
         public void AddWorker()
         {
-            this.id = (this.workers[workers.Length - 1].Id + 1); 
+            this.id = (this.workers[count - 1].Id + 1); 
             this.args = new[] { "ID", "FIO", "Heght", "DateOfBirth", "PlaceOfBirth" };
             args[0] = Convert.ToString(this.id);
             Console.Write("Фамилия И.О. сотрудника:");
