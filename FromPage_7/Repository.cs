@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -54,6 +55,7 @@ namespace FromPage_7
         }
         #endregion 
 
+       
         private readonly string fileName; // расположение файла
         private int index; // до считывания файла счетчик записий равен нулю
         private Worker[] workers;  // основной массив данных о сотрудниках
@@ -129,7 +131,7 @@ namespace FromPage_7
                         Convert.ToDateTime(args[1]), // Время добавления
                         args[2], // ФИО
                         Age(Convert.ToDateTime(args[5])), // Возраст
-                        Convert.ToInt32(args[4]), // вес
+                        Convert.ToInt32(args[4]), // рост
                         Convert.ToDateTime(args[5]), // дата рождения
                         args[6] // место рождения
                         ));
@@ -159,7 +161,7 @@ namespace FromPage_7
         /// <param name="fileName"></param>
         public void AddWorker()
         {
-            this.id++;
+            this.id = (this.workers[workers.Length - 1].Id + 1); 
             this.args = new[] { "ID", "FIO", "Heght", "DateOfBirth", "PlaceOfBirth" };
             args[0] = Convert.ToString(this.id);
             Console.Write("Фамилия И.О. сотрудника:");
@@ -190,11 +192,15 @@ namespace FromPage_7
 
         #region методы для работы с базой 
 
-        //            public Worker GetWorkerById(int id)
-        //         {
-        //                // происходит чтение из файла, возвращается Worker
-        //                // с запрашиваемым ID
-        //         }
+        //private Worker GetWorkerById(ID); // метод получения работника по его ID
+        
+
+
+        //private Worker GetIndex (Worker worker) // метод получения индекса от поля массива
+
+        // происходит чтение из файла, возвращается Worker
+        // с запрашиваемым ID
+
 
         //            public void DeleteWorker(int id)
         //         {
@@ -208,6 +214,21 @@ namespace FromPage_7
         //                // фильтрация нужных записей
         //                // и возврат массива считанных экземпляров
         //         }
+
+        /// <summary>
+        /// индексатор для вывода конкретного работника по индексу
+        /// </summary>
+        /// <param name="index">индекс конкретного работника</param>
+        /// <returns></returns>
+        //public string this[int index] 
+        //{
+        //    get { return this.workers[index].Print(); }
+        //}
+
+        //public int this[int ID]
+        //{
+        //    get { return this.workers[this.workers.Length-1].Id; }
+        //}
 
         #endregion
 
