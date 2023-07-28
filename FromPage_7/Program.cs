@@ -135,13 +135,24 @@ namespace FromPage_7
                     // поиск сотрудника
                     case "2":
                         {
-                            Console.WriteLine(workers.Length);
+                            Console.WriteLine("Введите необходимый ID:");
+                            int idPhound = Convert.ToInt32(Console.ReadLine());
+                            int idx = rep.GetWorkerById(idPhound);
+                            if (idx == -1)
+                            {
+                                Console.WriteLine("Такой ID не обнаружен.");
+                            }
+                            else
+                            {
+                                Console.WriteLine(idx);
+                            }
+                            Console.ReadKey();
                             break;
                         }
                     // поиск сотрудника
                     case "3":
                         {
-
+                            Console.WriteLine(workers.Length);
                             break;
                         }
                     // редактирования записи сотрудника

@@ -156,12 +156,12 @@ namespace FromPage_7
         }
 
         /// <summary>
-        /// Метод добавления нового сотрудника. (надо доделать присвоение ID) 
+        /// Метод добавления нового сотрудника.  
         /// </summary>
         /// <param name="fileName"></param>
         public void AddWorker()
         {
-            this.id = (this.workers[count - 1].Id + 1); 
+            this.id = (this.workers[count - 1].Id + 1); // счетчик сотрудников чтобы вводить коректный ID  в поле нового сотрудника
             this.args = new[] { "ID", "FIO", "Heght", "DateOfBirth", "PlaceOfBirth" };
             args[0] = Convert.ToString(this.id);
             Console.Write("Фамилия И.О. сотрудника:");
@@ -192,7 +192,18 @@ namespace FromPage_7
 
         #region методы для работы с базой 
 
-        //private Worker GetWorkerById(ID); // метод получения работника по его ID
+        public int GetWorkerById(int ID) // метод получения работника по его ID
+        {
+            int idx = -1;
+            for (int i = 0; i <= count; i++)
+            {
+                if (workers[i].Id == ID)
+                {
+                    idx = i; break;
+                }
+            }
+            return idx;
+        }
         
 
 
