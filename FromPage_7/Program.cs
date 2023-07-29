@@ -112,7 +112,7 @@ namespace FromPage_7
 
             while (flag == true)
             {
-                Worker[] workers = rep.GetAllWorkers(); // Заполнение массива из файла для определения актуального ID
+                    rep.GetAllWorkers(); // Заполнение массива из файла для определения актуального ID
 
                 Console.WriteLine("Справочник «Сотрудники» \n" +
                     " Нажмите 1 - для просмотра всех сотрудников\n" +
@@ -124,27 +124,27 @@ namespace FromPage_7
 
                 switch (Console.ReadLine())
                 {
-                    // выбор просмотра списка сотрудников
+                    // выбор просмотра списка всех сотрудников в базе
                     case "1":
                         Console.Clear();
-                        rep.PrintTitles();
-                        workers = rep.GetAllWorkers();
-                        rep.Print(workers);
+                        rep.PrintAll();
                         Console.ReadKey();
                         break;
                     // поиск сотрудника
                     case "2":
                         {
                             Console.WriteLine("Введите необходимый ID:");
-                            int idPhound = Convert.ToInt32(Console.ReadLine());
-                            int idx = rep.GetWorkerById(idPhound);
+                            int idFound = Convert.ToInt32(Console.ReadLine());
+                            int idx = rep.GetWorkerById(idFound);
                             if (idx == -1)
                             {
                                 Console.WriteLine("Такой ID не обнаружен.");
                             }
                             else
                             {
-                                Console.WriteLine(idx);
+                                rep.PrintTitles();
+                                //rep.Print(workers[idx]);
+                                //Console.WriteLine(idx);
                             }
                             Console.ReadKey();
                             break;
@@ -152,7 +152,7 @@ namespace FromPage_7
                     // поиск сотрудника
                     case "3":
                         {
-                            Console.WriteLine(workers.Length);
+                            Console.WriteLine();
                             break;
                         }
                     // редактирования записи сотрудника

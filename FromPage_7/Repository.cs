@@ -83,38 +83,7 @@ namespace FromPage_7
         }
 
         /// <summary>
-        /// Метод для вывода всей базы сотрудников в консоль
-        /// </summary>
-        /// <param name="strings">массив сотрудников</param>
-        public void Print(Worker[] strings)
-        {
-            if (strings == null) // проверка ну пустую базу сотрудников при выводе в консоль
-            {
-                Console.WriteLine("Файл пуст");
-            }
-            else
-            {
-                for (int i = 0; i < count; i++)
-                {
-                    Console.WriteLine(this.workers[i].Print());
-                }
-            }
-        }
-
-        /// <summary>
-        /// Метод для определения возроста сотрудника
-        /// </summary>
-        /// <param name="dateOfBirth">дата рождения</param>
-        /// <returns></returns>
-        private int Age(DateTime dateOfBirth)
-        {
-            int age = DateTime.Now.Year - dateOfBirth.Year;
-            if (DateTime.Now.DayOfYear < dateOfBirth.DayOfYear) age--;
-            return age;
-        }
-
-        /// <summary>
-        /// здесь происходит чтение из файла и возврат массива считанных экземпляров 
+        /// здесь происходит чтение из файла и возврат массива считанных экземпляров   
         /// </summary>
         /// <param name="fileName"></param>
         /// <returns></returns>
@@ -141,11 +110,59 @@ namespace FromPage_7
             return this.workers;
         }
 
+
+
+
+        /// <summary>
+        /// Метод для вывода всей базы сотрудников в консоль
+        /// </summary>
+        /// <param name="strings">массив сотрудников</param>
+        public void PrintAll() 
+        {
+            if (this.workers == null) // проверка ну пустую базу сотрудников при выводе в консоль
+            {
+                Console.WriteLine("Файл пуст");
+            }
+            else
+            {
+                PrintTitles();
+                for (int i = 0; i < count; i++)
+                {
+                    Print(i);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Метод для выведения в консоль одного сотрудника
+        /// </summary>
+        /// <param name="i">индекс массива сотрудников</param>
+        private void Print (int i)
+        {
+            Console.WriteLine(this.workers[i].Print());
+        }
+
+
+        /// <summary>
+        /// Метод для определения возроста сотрудника
+        /// </summary>
+        /// <param name="dateOfBirth">дата рождения</param>
+        /// <returns></returns>
+        private int Age(DateTime dateOfBirth)
+
+        {
+            int age = DateTime.Now.Year - dateOfBirth.Year;
+            if (DateTime.Now.DayOfYear < dateOfBirth.DayOfYear) age--;
+            return age;
+        }
+
+       
+
         /// <summary>
         /// Метод добавления сотрудника в хранилище
         /// </summary>
         /// <param name="ConcreteWorker">Сотрудник</param>
-        public void Add(Worker ConcreteWorker)
+        private void Add(Worker ConcreteWorker)
         {
             if (count >= this.workers.Length)
             {
@@ -162,6 +179,8 @@ namespace FromPage_7
         public void AddWorker()
         {
             this.id = (this.workers[count - 1].Id + 1); // счетчик сотрудников чтобы вводить коректный ID  в поле нового сотрудника
+
+            // опрос пользователя для ввода данных о работнике
             this.args = new[] { "ID", "FIO", "Heght", "DateOfBirth", "PlaceOfBirth" };
             args[0] = Convert.ToString(this.id);
             Console.Write("Фамилия И.О. сотрудника:");
@@ -173,7 +192,7 @@ namespace FromPage_7
             Console.Write("Место рождения сотрудника:");
             args[4] = Console.ReadLine();
 
-            
+            // создание строки для записи в файл
             string line = ($"{args[0]}#" +                  // ID
                 $"{DateTime.Now}#" +                        // Время добавления
                 $"{args[1]}#" +                             // ФИО
@@ -181,7 +200,7 @@ namespace FromPage_7
                 $"{args[2]}#" +                             // вес
                 $"{args[3]}#" +                             // дата рождения
                 $"{args[4]}");                              // место рождения
-
+            // запись строки в конец файла
             using (StreamWriter sw = new StreamWriter(this.fileName, true))
             {
                 sw.WriteLine(line);
@@ -203,6 +222,10 @@ namespace FromPage_7
                 }
             }
             return idx;
+
+            // МАНИФЕСТ
+            // отменить возврат в майн и создать метод сброса в принт на подобии всех работников но вывод конкретного обнаруженого
+
         }
         
 
