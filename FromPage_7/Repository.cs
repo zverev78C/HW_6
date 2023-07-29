@@ -110,68 +110,6 @@ namespace FromPage_7
             return this.workers;
         }
 
-
-
-
-        /// <summary>
-        /// Метод для вывода всей базы сотрудников в консоль
-        /// </summary>
-        /// <param name="strings">массив сотрудников</param>
-        public void PrintAll() 
-        {
-            if (this.workers == null) // проверка ну пустую базу сотрудников при выводе в консоль
-            {
-                Console.WriteLine("Файл пуст");
-            }
-            else
-            {
-                PrintTitles();
-                for (int i = 0; i < count; i++)
-                {
-                    Print(i);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Метод для выведения в консоль одного сотрудника
-        /// </summary>
-        /// <param name="i">индекс массива сотрудников</param>
-        private void Print (int i)
-        {
-            Console.WriteLine(this.workers[i].Print());
-        }
-
-
-        /// <summary>
-        /// Метод для определения возроста сотрудника
-        /// </summary>
-        /// <param name="dateOfBirth">дата рождения</param>
-        /// <returns></returns>
-        private int Age(DateTime dateOfBirth)
-
-        {
-            int age = DateTime.Now.Year - dateOfBirth.Year;
-            if (DateTime.Now.DayOfYear < dateOfBirth.DayOfYear) age--;
-            return age;
-        }
-
-       
-
-        /// <summary>
-        /// Метод добавления сотрудника в хранилище
-        /// </summary>
-        /// <param name="ConcreteWorker">Сотрудник</param>
-        private void Add(Worker ConcreteWorker)
-        {
-            if (count >= this.workers.Length)
-            {
-                Array.Resize(ref this.workers, this.workers.Length * 2);
-            }
-            this.workers[count] = ConcreteWorker;
-            this.count++;
-        }
-
         /// <summary>
         /// Метод добавления нового сотрудника.  
         /// </summary>
@@ -207,21 +145,85 @@ namespace FromPage_7
             }
         }
 
+        /// <summary>
+        /// Метод для вывода всей базы сотрудников в консоль
+        /// </summary>
+        /// <param name="strings">массив сотрудников</param>
+        public void PrintAll() 
+        {
+            if (this.workers == null) // проверка ну пустую базу сотрудников при выводе в консоль
+            {
+                Console.WriteLine("Файл пуст");
+            }
+            else
+            {
+                PrintTitles();
+                for (int i = 0; i < count; i++)
+                {
+                    Print(i);
+                }
+            }
+        }
+
+
+
+
+        /// <summary>
+        /// Метод для выведения в консоль одного сотрудника
+        /// </summary>
+        /// <param name="i">индекс массива сотрудников</param>
+        private void Print (int i)
+        {
+            Console.WriteLine(this.workers[i].Print());
+        }
+
+        /// <summary>
+        /// Метод для определения возроста сотрудника
+        /// </summary>
+        /// <param name="dateOfBirth">дата рождения</param>
+        /// <returns></returns>
+        private int Age(DateTime dateOfBirth)
+
+        {
+            int age = DateTime.Now.Year - dateOfBirth.Year;
+            if (DateTime.Now.DayOfYear < dateOfBirth.DayOfYear) age--;
+            return age;
+        }
+
+        /// <summary>
+        /// Метод добавления сотрудника в хранилище
+        /// </summary>
+        /// <param name="ConcreteWorker">Сотрудник</param>
+        private void Add(Worker ConcreteWorker)
+        {
+            if (count >= this.workers.Length)
+            {
+                Array.Resize(ref this.workers, this.workers.Length * 2);
+            }
+            this.workers[count] = ConcreteWorker;
+            this.count++;
+        }
+
+      
+
         #endregion
 
         #region методы для работы с базой 
 
-        public int GetWorkerById(int ID) // метод получения работника по его ID
+        public void GetWorkerById(int ID) // метод получения работника по его ID
         {
+            PrintTitles();
             int idx = -1;
-            for (int i = 0; i <= count; i++)
+            for (int i = 0; i < count; i++)
             {
                 if (workers[i].Id == ID)
                 {
-                    idx = i; break;
+                    idx = i;
+                    Print(i);
                 }
             }
-            return idx;
+            if (idx == -1) { Console.WriteLine("Такой сотрудник не обнаружен"); };
+           // return idx;
 
             // МАНИФЕСТ
             // отменить возврат в майн и создать метод сброса в принт на подобии всех работников но вывод конкретного обнаруженого

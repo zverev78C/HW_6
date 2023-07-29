@@ -112,7 +112,7 @@ namespace FromPage_7
 
             while (flag == true)
             {
-                    rep.GetAllWorkers(); // Заполнение массива из файла для определения актуального ID
+                rep.GetAllWorkers(); // Заполнение массива из файла для определения актуального ID
 
                 Console.WriteLine("Справочник «Сотрудники» \n" +
                     " Нажмите 1 - для просмотра всех сотрудников\n" +
@@ -133,20 +133,12 @@ namespace FromPage_7
                     // поиск сотрудника
                     case "2":
                         {
+                            Console.Clear();
                             Console.WriteLine("Введите необходимый ID:");
                             int idFound = Convert.ToInt32(Console.ReadLine());
-                            int idx = rep.GetWorkerById(idFound);
-                            if (idx == -1)
-                            {
-                                Console.WriteLine("Такой ID не обнаружен.");
-                            }
-                            else
-                            {
-                                rep.PrintTitles();
-                                //rep.Print(workers[idx]);
-                                //Console.WriteLine(idx);
-                            }
+                            rep.GetWorkerById(idFound);
                             Console.ReadKey();
+
                             break;
                         }
                     // поиск сотрудника
