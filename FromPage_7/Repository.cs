@@ -165,7 +165,24 @@ namespace FromPage_7
             }
         }
 
-
+        /// <summary>
+        /// Метод поиска сотрудника по его ID 
+        /// </summary>
+        /// <param name="ID"></param>
+        public void GetWorkerById(int ID)
+        {
+            PrintTitles();
+            int idx = -1;
+            for (int i = 0; i < count; i++)
+            {
+                if (workers[i].Id == ID)
+                {
+                    idx = i;
+                    Print(i);
+                }
+            }
+            if (idx == -1) { Console.WriteLine("Такой сотрудник не обнаружен"); };
+        }
 
 
         /// <summary>
@@ -210,25 +227,7 @@ namespace FromPage_7
 
         #region методы для работы с базой 
 
-        public void GetWorkerById(int ID) // метод получения работника по его ID
-        {
-            PrintTitles();
-            int idx = -1;
-            for (int i = 0; i < count; i++)
-            {
-                if (workers[i].Id == ID)
-                {
-                    idx = i;
-                    Print(i);
-                }
-            }
-            if (idx == -1) { Console.WriteLine("Такой сотрудник не обнаружен"); };
-           // return idx;
-
-            // МАНИФЕСТ
-            // отменить возврат в майн и создать метод сброса в принт на подобии всех работников но вывод конкретного обнаруженого
-
-        }
+       
         
 
 

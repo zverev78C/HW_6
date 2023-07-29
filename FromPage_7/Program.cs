@@ -156,7 +156,6 @@ namespace FromPage_7
 
                     // выбор добавления нового сотрудника в список
                     case "9":
-                        rep.PrintTitles();
                         rep.AddWorker();
                         rep.GetAllWorkers();
                         Console.Clear();
