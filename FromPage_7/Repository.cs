@@ -162,6 +162,40 @@ namespace FromPage_7
             if (idx == -1) { Console.WriteLine("Такой сотрудник не обнаружен"); };
         }
 
+        /// <summary>
+        /// Метод удаления сотрудника из списка по ID  
+        /// </summary>
+        /// <param name="ID"></param>
+        public void DeleteWorker(int ID)
+        {
+            using (StreamWriter sw = new StreamWriter(this.fileName, false))
+            {
+                sw.Write(" ");
+            } // очистка файла перед записью массива
+
+            string line = ""; // переменная для записи сотрудника в файл    
+            for (int i = 0; i < count; i++)
+            {
+                if (workers[i].Id == ID) // совпадение по ID
+                {
+
+                }
+                else // не совпадение по ID
+                {
+                    line = $"{workers[i].Id}#" +
+                        $"{workers[i].DateTime}#" +
+                        $"{workers[i].Fio}#" +
+                        $"{workers[i].YearsOld}#" +
+                        $"{workers[i].Height}#" +
+                        $"{workers[i].DateOfBirth}#" +
+                        $"{workers[i].PlaceOfBirth}";
+                    SaveWorker(line);
+                }
+            }
+        }
+
+
+
 
         /// <summary>
         /// Метод для выведения в консоль одного сотрудника
@@ -238,34 +272,6 @@ namespace FromPage_7
 
 
 
-
-        public void DeleteWorker(int ID)
-        {
-            using (StreamWriter sw = new StreamWriter(this.fileName, false))
-            {
-                sw.Write(" ");
-            } // очистка файла перед записью массива
-
-            string line = ""; // переменная для записи сотрудника в файл    
-            for (int i = 0; i < count; i++)
-            {
-                if (workers[i].Id == ID) // совпадение по ID
-                {
-                    
-                }
-                else // не совпадение по ID
-                {
-                    line = $"{workers[i].Id}#" +
-                        $"{workers[i].DateTime}#" +
-                        $"{workers[i].Fio}#" +
-                        $"{workers[i].YearsOld}#" +
-                        $"{workers[i].Height}#" +
-                        $"{workers[i].DateOfBirth}#" +
-                        $"{workers[i].PlaceOfBirth}";
-                    SaveWorker(line);
-                }
-            }
-        }
 
 
 
