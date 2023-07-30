@@ -120,7 +120,7 @@ namespace FromPage_7
                 $"{args[3]}#" +                             // дата рождения
                 $"{args[4]}");                              // место рождения
 
-            SaveWorker(line, true);           
+            SaveWorker(line);
         }
 
         /// <summary>
@@ -221,9 +221,9 @@ namespace FromPage_7
         /// </summary>
         /// <param name="line">строка для записи</param>
         /// <param name="Flag">метод записи</param>
-        private void SaveWorker(string line, bool Flag)
+        private void SaveWorker(string line)
         {
-            using (StreamWriter sw = new StreamWriter(this.fileName, Flag))
+            using (StreamWriter sw = new StreamWriter(this.fileName, true))
             {
                 sw.WriteLine(line);
             }
@@ -241,20 +241,17 @@ namespace FromPage_7
 
         public void DeleteWorker(int ID)
         {
-            using (StreamWriter sw = new StreamWriter(this.fileName,false))
+            using (StreamWriter sw = new StreamWriter(this.fileName, false))
             {
-                sw.Write (" ");
-            }
+                sw.Write(" ");
+            } // очистка файла перед записью массива
 
-            string line = "";
-            bool flag = false;
-            int idx = -1;
+            string line = ""; // переменная для записи сотрудника в файл    
             for (int i = 0; i < count; i++)
             {
-                flag = i == 0 ? false : true;
                 if (workers[i].Id == ID) // совпадение по ID
                 {
-                    idx = i;
+                    
                 }
                 else // не совпадение по ID
                 {
@@ -265,16 +262,12 @@ namespace FromPage_7
                         $"{workers[i].Height}#" +
                         $"{workers[i].DateOfBirth}#" +
                         $"{workers[i].PlaceOfBirth}";
-                    SaveWorker(line, flag);
+                    SaveWorker(line);
                 }
-                
-            }                  
-            //                // считывается файл, находится нужный Worker
-            //                // происходит запись в файл всех Worker,
-            //                // кроме удаляемого
+            }
         }
 
-      
+
 
 
         //            public Worker[] GetWorkersBetweenTwoDates(DateTime dateFrom, DateTime dateTo)
