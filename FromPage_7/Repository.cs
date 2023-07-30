@@ -168,12 +168,12 @@ namespace FromPage_7
         /// <param name="ID"></param>
         public void DeleteWorker(int ID)
         {
+            // очистка файла перед записью массива
             using (StreamWriter sw = new StreamWriter(this.fileName, false))
             {
                 sw.Write(" ");
-            } // очистка файла перед записью массива
-
-            string line = ""; // переменная для записи сотрудника в файл    
+            } 
+            // запись массива без указаного сотрудника 
             for (int i = 0; i < count; i++)
             {
                 if (workers[i].Id == ID) // совпадение по ID
@@ -182,7 +182,7 @@ namespace FromPage_7
                 }
                 else // не совпадение по ID
                 {
-                    line = $"{workers[i].Id}#" +
+                   string line = $"{workers[i].Id}#" +
                         $"{workers[i].DateTime}#" +
                         $"{workers[i].Fio}#" +
                         $"{workers[i].YearsOld}#" +
