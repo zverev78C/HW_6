@@ -112,15 +112,15 @@ namespace FromPage_7
 
             while (flag == true)
             {
-                rep.GetAllWorkers(); // Заполнение массива из файла для определения актуального ID
+                rep.GetAllWorkers(); // Заполнение массива из файла
 
                 Console.WriteLine("Справочник «Сотрудники» \n" +
                     " Нажмите 1 - для просмотра всех сотрудников\n" +
                     " Нажмите 2 - для поиска сотрудников\n" +
-                    " Нажмите 3 - редактирования записи сотрудника\n" +
+                    " Нажмите 3 - для удаления записи сотрудника\n" +
                     " Нажмите 4 - пока пустой выбор\n" +
                     " Нажмите 9 - для добавления нового сотрудника\n" +
-                    " Нажмите 10 - для выхода из программы");
+                    " Нажмите 10 - для выхода из программы\n");
 
                 switch (Console.ReadLine())
                 {
@@ -129,6 +129,7 @@ namespace FromPage_7
                         Console.Clear();
                         rep.PrintAll();
                         Console.ReadKey();
+                        Console.Clear();
                         break;
                     // поиск сотрудника
                     case "2":
@@ -138,13 +139,15 @@ namespace FromPage_7
                             int idFound = Convert.ToInt32(Console.ReadLine());
                             rep.GetWorkerById(idFound);
                             Console.ReadKey();
-
                             break;
                         }
-                    // поиск сотрудника
+                    // поиск по временному отрезку
                     case "3":
                         {
-                            Console.WriteLine();
+                            Console.Clear();
+                            Console.WriteLine("Введите необходимый ID:");
+                            int idDel = Convert.ToInt32(Console.ReadLine());
+                            rep.DeleteWorker(idDel);
                             break;
                         }
                     // редактирования записи сотрудника

@@ -36,26 +36,7 @@ namespace FromPage_7
         //          2#15.12.2021 03:12#Алексеев Алексей Иванович#24#176#05.11.1980#город Томск
         #endregion
 
-        #region Заголовки
-        /// <summary>
-        /// Метод для выведения заголовков в консоль
-        /// </summary>
-        public void PrintTitles()
-        {
-            string [] Titles = new string [7];
-            Titles[0] = "ID";
-            Titles[1] = "Время создания записи";
-            Titles[2] = "Фамилия И.О.";
-            Titles[3] = "Возраст";
-            Titles[4] = "Рост";
-            Titles[5] = "Дата Рождения";
-            Titles[6] = "Место Рождения";
 
-            Console.WriteLine($"{Titles[0],4}\t {Titles[1],23} {Titles[2],20} {Titles[3],8} {Titles[4],8} {Titles[5],15} {Titles[6],15}");
-        }
-        #endregion 
-
-       
         private readonly string fileName; // расположение файла
         private int count; // до считывания файла счетчик записий равен нулю
         private Worker[] workers;  // основной массив данных о сотрудниках
@@ -116,7 +97,7 @@ namespace FromPage_7
         /// <param name="fileName"></param>
         public void AddWorker()
         {
-            this.id = (this.workers[count - 1].Id + 1); // счетчик сотрудников чтобы вводить коректный ID  в поле нового сотрудника
+            this.id = count == 0 ? (this.workers[count].Id + 1) : (this.workers[count - 1].Id + 1); // счетчик сотрудников чтобы вводить коректный ID  в поле нового сотрудника
 
             // опрос пользователя для ввода данных о работнике
             this.args = new[] { "ID", "FIO", "Heght", "DateOfBirth", "PlaceOfBirth" };
@@ -138,18 +119,15 @@ namespace FromPage_7
                 $"{args[2]}#" +                             // вес
                 $"{args[3]}#" +                             // дата рождения
                 $"{args[4]}");                              // место рождения
-            // запись строки в конец файла
-            using (StreamWriter sw = new StreamWriter(this.fileName, true))
-            {
-                sw.WriteLine(line);
-            }
+
+            SaveWorker(line, true);           
         }
 
         /// <summary>
         /// Метод для вывода всей базы сотрудников в консоль
         /// </summary>
         /// <param name="strings">массив сотрудников</param>
-        public void PrintAll() 
+        public void PrintAll()
         {
             if (this.workers == null) // проверка ну пустую базу сотрудников при выводе в консоль
             {
@@ -189,7 +167,7 @@ namespace FromPage_7
         /// Метод для выведения в консоль одного сотрудника
         /// </summary>
         /// <param name="i">индекс массива сотрудников</param>
-        private void Print (int i)
+        private void Print(int i)
         {
             Console.WriteLine(this.workers[i].Print());
         }
@@ -208,41 +186,97 @@ namespace FromPage_7
         }
 
         /// <summary>
-        /// Метод добавления сотрудника в хранилище
+        /// Метод добавления сотрудника в массив
         /// </summary>
         /// <param name="ConcreteWorker">Сотрудник</param>
         private void Add(Worker ConcreteWorker)
         {
-            if (count >= this.workers.Length)
+            if (count >= this.workers.Length) // проверка длины массива 
             {
                 Array.Resize(ref this.workers, this.workers.Length * 2);
             }
-            this.workers[count] = ConcreteWorker;
+            this.workers[count] = ConcreteWorker; // добавление работника в массив
             this.count++;
         }
 
-      
+        /// <summary>
+        /// Метод для выведения заголовков в консоль
+        /// </summary>
+        private void PrintTitles()
+        {
+            string[] Titles = new string[7];
+            Titles[0] = "ID";
+            Titles[1] = "Время создания записи";
+            Titles[2] = "Фамилия И.О.";
+            Titles[3] = "Возраст";
+            Titles[4] = "Рост";
+            Titles[5] = "Дата Рождения";
+            Titles[6] = "Место Рождения";
+
+            Console.WriteLine($"{Titles[0],4}\t {Titles[1],23} {Titles[2],17} {Titles[3],8} {Titles[4],8} {Titles[5],17} {Titles[6],19}\n");
+        }
+
+        /// <summary>
+        /// Метод записи строки непосредственно в файл
+        /// </summary>
+        /// <param name="line">строка для записи</param>
+        /// <param name="Flag">метод записи</param>
+        private void SaveWorker(string line, bool Flag)
+        {
+            using (StreamWriter sw = new StreamWriter(this.fileName, Flag))
+            {
+                sw.WriteLine(line);
+            }
+        }
+
 
         #endregion
 
         #region методы для работы с базой 
 
-       
-        
 
 
-        //private Worker GetIndex (Worker worker) // метод получения индекса от поля массива
-
-        // происходит чтение из файла, возвращается Worker
-        // с запрашиваемым ID
 
 
-        //            public void DeleteWorker(int id)
-        //         {
-        //                // считывается файл, находится нужный Worker
-        //                // происходит запись в файл всех Worker,
-        //                // кроме удаляемого
-        //         }
+
+        public void DeleteWorker(int ID)
+        {
+            using (StreamWriter sw = new StreamWriter(this.fileName,false))
+            {
+                sw.Write (" ");
+            }
+
+            string line = "";
+            bool flag = false;
+            int idx = -1;
+            for (int i = 0; i < count; i++)
+            {
+                flag = i == 0 ? false : true;
+                if (workers[i].Id == ID) // совпадение по ID
+                {
+                    idx = i;
+                }
+                else // не совпадение по ID
+                {
+                    line = $"{workers[i].Id}#" +
+                        $"{workers[i].DateTime}#" +
+                        $"{workers[i].Fio}#" +
+                        $"{workers[i].YearsOld}#" +
+                        $"{workers[i].Height}#" +
+                        $"{workers[i].DateOfBirth}#" +
+                        $"{workers[i].PlaceOfBirth}";
+                    SaveWorker(line, flag);
+                }
+                
+            }                  
+            //                // считывается файл, находится нужный Worker
+            //                // происходит запись в файл всех Worker,
+            //                // кроме удаляемого
+        }
+
+      
+
+
         //            public Worker[] GetWorkersBetweenTwoDates(DateTime dateFrom, DateTime dateTo)
         //         {
         //                // здесь происходит чтение из файла
@@ -250,20 +284,7 @@ namespace FromPage_7
         //                // и возврат массива считанных экземпляров
         //         }
 
-        /// <summary>
-        /// индексатор для вывода конкретного работника по индексу
-        /// </summary>
-        /// <param name="index">индекс конкретного работника</param>
-        /// <returns></returns>
-        //public string this[int index] 
-        //{
-        //    get { return this.workers[index].Print(); }
-        //}
 
-        //public int this[int ID]
-        //{
-        //    get { return this.workers[this.workers.Length-1].Id; }
-        //}
 
         #endregion
 
