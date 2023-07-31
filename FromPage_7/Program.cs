@@ -141,7 +141,7 @@ namespace FromPage_7
                             Console.ReadKey();
                             break;
                         }
-                    // поиск по временному отрезку
+                    // удаление сотрудника
                     case "3":
                         {
                             Console.Clear();
@@ -150,12 +150,26 @@ namespace FromPage_7
                             rep.DeleteWorker(idDel);
                             break;
                         }
-                    // редактирования записи сотрудника
+                    // Пустой выбор
                     case "4":
                         {
 
                             break;
                         }
+                    // Пустой выбор
+                    case "5":
+                        {
+
+                            break;
+                        }
+                    // Пустой выбор
+                    case "6":
+                        {
+
+                            break;
+                        }
+
+
 
                     // выбор добавления нового сотрудника в список
                     case "9":

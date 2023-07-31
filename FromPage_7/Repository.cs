@@ -268,22 +268,12 @@ namespace FromPage_7
 
         #region методы для работы с базой 
 
-
-
-
-
-
-
-
-
-        //            public Worker[] GetWorkersBetweenTwoDates(DateTime dateFrom, DateTime dateTo)
-        //         {
-        //                // здесь происходит чтение из файла
-        //                // фильтрация нужных записей
-        //                // и возврат массива считанных экземпляров
-        //         }
-
-
+        public Worker[] GetWorkersBetweenTwoDates(DateTime dateFrom, DateTime dateTo)
+        {
+            // здесь происходит чтение из файла
+            // фильтрация нужных записей
+            // и возврат массива считанных экземпляров
+        }
 
         #endregion
 
