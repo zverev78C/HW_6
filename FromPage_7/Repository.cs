@@ -268,8 +268,19 @@ namespace FromPage_7
 
         #region методы для работы с базой 
 
-        public Worker[] GetWorkersBetweenTwoDates(DateTime dateFrom, DateTime dateTo)
+        public void GetWorkersBetweenTwoDates(DateTime dateFrom, DateTime dateTo)
         {
+            PrintTitles();
+            int idx = -1;
+            for (int i = 0; i < count; i++)
+            {
+                if (workers[i].DateTime > dateFrom && workers[i].DateTime < dateTo)
+                {
+                    idx = i;
+                    Print(i);
+                }
+            }
+            if (idx == -1) { Console.WriteLine("Такой сотрудник не обнаружен"); };
             // здесь происходит чтение из файла
             // фильтрация нужных записей
             // и возврат массива считанных экземпляров

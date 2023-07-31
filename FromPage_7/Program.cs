@@ -95,7 +95,6 @@ namespace FromPage_7
         //          Сортировку по полям удобнее всего выполнять с помощью метода OrderBy. Пример сортировки по FIO и по ID:
         //          workers.OrderBy(w=>w.FIO);
         //          workers.OrderBy(w => w.Id);
-
         #endregion
 
         static void Main(string[] args)
@@ -118,7 +117,7 @@ namespace FromPage_7
                     " Нажмите 1 - для просмотра всех сотрудников\n" +
                     " Нажмите 2 - для поиска сотрудников\n" +
                     " Нажмите 3 - для удаления записи сотрудника\n" +
-                    " Нажмите 4 - пока пустой выбор\n" +
+                    " Нажмите 4 - Поиск сотрудников по дате\n" +
                     " Нажмите 9 - для добавления нового сотрудника\n" +
                     " Нажмите 10 - для выхода из программы\n");
 
@@ -150,10 +149,15 @@ namespace FromPage_7
                             rep.DeleteWorker(idDel);
                             break;
                         }
-                    // Пустой выбор
+                    // Поиск по дате 
                     case "4":
                         {
-
+                            Console.Clear();
+                            Console.WriteLine("Введите дату начала поиска");
+                            DateTime dateFrom = Convert.ToDateTime(Console.ReadLine());
+                            Console.WriteLine("Введите дату конца поиска");
+                            DateTime dateTo = Convert.ToDateTime(Console.ReadLine());
+                            rep.GetWorkersBetweenTwoDates(dateFrom, dateTo);    
                             break;
                         }
                     // Пустой выбор
@@ -165,12 +169,8 @@ namespace FromPage_7
                     // Пустой выбор
                     case "6":
                         {
-
                             break;
                         }
-
-
-
                     // выбор добавления нового сотрудника в список
                     case "9":
                         rep.AddWorker();
@@ -181,7 +181,6 @@ namespace FromPage_7
                     case "10":
                         flag = false;
                         break;
-
                     default:
                         Console.WriteLine("Не верный выбор попробуйте еще раз:");
                         Console.ReadKey();
@@ -190,7 +189,6 @@ namespace FromPage_7
                 }
             }
         }
-
     }
 }
 
