@@ -118,6 +118,7 @@ namespace FromPage_7
                     " Нажмите 2 - для поиска сотрудников\n" +
                     " Нажмите 3 - для удаления записи сотрудника\n" +
                     " Нажмите 4 - Поиск сотрудников по дате\n" +
+                    " Нажмите 5 - Для сортировки списка сотрудников по условию\n" +
                     " Нажмите 9 - для добавления нового сотрудника\n" +
                     " Нажмите 10 - для выхода из программы\n");
 
@@ -138,6 +139,7 @@ namespace FromPage_7
                             int idFound = Convert.ToInt32(Console.ReadLine());
                             rep.GetWorkerById(idFound);
                             Console.ReadKey();
+                            Console.Clear();
                             break;
                         }
                     // удаление сотрудника
@@ -150,22 +152,64 @@ namespace FromPage_7
                             break;
                         }
                     // Поиск по дате 
-                    case "4":
+                    case "4": //задать возможность не правильного ввода данных
                         {
                             Console.Clear();
                             Console.WriteLine("Введите дату начала поиска");
                             DateTime dateFrom = Convert.ToDateTime(Console.ReadLine());
                             Console.WriteLine("Введите дату конца поиска");
                             DateTime dateTo = Convert.ToDateTime(Console.ReadLine());
-                            rep.GetWorkersBetweenTwoDates(dateFrom, dateTo);    
+                            rep.GetWorkersBetweenTwoDates(dateFrom, dateTo);
+                            Console.ReadKey();
+                            Console.Clear();
                             break;
                         }
-                    // Пустой выбор
+                    // Сортировать список по условию
                     case "5":
                         {
+                            Console.Clear();
+                            Console.WriteLine("выберите условие сортировки\n " +
+                                "Нажмите 1 по ID\n " +
+                                "Нажмите 2  по Имени\n " +
+                                "Нажмите 3  по возрасту\n " +
+                                "Нажмите 4  по росту\n " +
+                                "Нажмите 5 по месту рождения");
 
+
+                            switch (Console.ReadLine())
+                            {
+                                case "1":
+                                    {
+                                        break;
+                                    }
+                                case "2":
+                                    {
+                                        break;
+                                    }
+                                case "3":
+                                    {
+                                        break;
+                                    }
+                                case "4":
+                                    {
+                                        break;
+                                    }
+                                case "5":
+                                    {
+                                        break;
+                                    }
+                                default:
+                                    {
+                                        Console.WriteLine("Не верный выбор условия сортировки");
+                                        break;
+                                    }
+                            }
+
+                            Console.ReadKey();
+                            Console.Clear();
                             break;
                         }
+
                     // Пустой выбор
                     case "6":
                         {

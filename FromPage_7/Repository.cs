@@ -286,6 +286,11 @@ namespace FromPage_7
             // и возврат массива считанных экземпляров
         }
 
+
+        public void SortingByCondition (string condition) 
+        {
+        
+        }
         #endregion
 
 
