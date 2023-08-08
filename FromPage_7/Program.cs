@@ -175,7 +175,6 @@ namespace FromPage_7
                                 "Нажмите 4  по росту\n " +
                                 "Нажмите 5 по месту рождения");
 
-
                             switch (Console.ReadLine())
                             {
                                 case "1":

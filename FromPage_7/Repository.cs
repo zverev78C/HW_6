@@ -194,6 +194,26 @@ namespace FromPage_7
             }
         }
 
+        /// <summary>
+        /// Метод выбора сотрудников по отрезку времени 
+        /// </summary>
+        /// <param name="dateFrom"></param>
+        /// <param name="dateTo"></param>
+        public void GetWorkersBetweenTwoDates(DateTime dateFrom, DateTime dateTo)
+        {
+            PrintTitles(); // печать заголовков
+            int idx = -1; // контрольное значение для вывода не обнаружения сотрудника
+            for (int i = 0; i < count; i++)
+            {
+                if (workers[i].DateTime > dateFrom && workers[i].DateTime < dateTo) // пороверка на соответствие условию поиска
+                {
+                    idx = i;
+                    Print(i); // печать подходящего сотрудника
+                }
+            }
+            if (idx == -1) { Console.WriteLine("Такой сотрудник не обнаружен"); };
+        }
+
 
 
 
@@ -267,29 +287,11 @@ namespace FromPage_7
         #endregion
 
         #region методы для работы с базой 
-
-        public void GetWorkersBetweenTwoDates(DateTime dateFrom, DateTime dateTo)
-        {
-            PrintTitles();
-            int idx = -1;
-            for (int i = 0; i < count; i++)
-            {
-                if (workers[i].DateTime > dateFrom && workers[i].DateTime < dateTo)
-                {
-                    idx = i;
-                    Print(i);
-                }
-            }
-            if (idx == -1) { Console.WriteLine("Такой сотрудник не обнаружен"); };
-            // здесь происходит чтение из файла
-            // фильтрация нужных записей
-            // и возврат массива считанных экземпляров
-        }
-
+     
 
         public void SortingByCondition (string condition) 
         {
-        
+            workers.OrderBy(w => w.Id);
         }
         #endregion
 
