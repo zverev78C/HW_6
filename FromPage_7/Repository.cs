@@ -267,7 +267,7 @@ namespace FromPage_7
             Titles[5] = "Дата Рождения";
             Titles[6] = "Место Рождения";
 
-            Console.WriteLine($"{Titles[0],4}\t {Titles[1],23} {Titles[2],17} {Titles[3],8} {Titles[4],8} {Titles[5],17} {Titles[6],19}\n");
+            Console.WriteLine($"{Titles[0],4}\t {Titles[1],23}\t {Titles[2],17} {Titles[3],8} {Titles[4],8} {Titles[5],17} {Titles[6],19}\n");
         }
 
         /// <summary>
@@ -291,8 +291,63 @@ namespace FromPage_7
 
         public void SortingByCondition (string condition) 
         {
-            workers.OrderBy(w => w.Id);
+            if (condition == "1") 
+            {
+                var sortedworkers = workers.OrderBy(w => w.Id);
+                PrintTitles();
+                foreach (var w in sortedworkers)
+                {
+                    if (w.Id == 0) {}
+                    else { Console.WriteLine(w.Print()); }
+                }
+            }
+           else if (condition == "2")
+            {
+                var sortedworkers = workers.OrderBy(w => w.Fio);
+                PrintTitles();
+                foreach (var w in sortedworkers)
+                {
+                    if (w.Id == 0) { }
+                    else { Console.WriteLine(w.Print()); }
+                }
+            }
+            else if (condition == "3")
+            {
+                var sortedworkers = workers.OrderBy(w => w.YearsOld);
+                PrintTitles();
+                foreach (var w in sortedworkers)
+                {
+                    if (w.Id == 0) { }
+                    else { Console.WriteLine(w.Print()); }
+                }
+            }
+            else if (condition == "4")
+            {
+                var sortedworkers = workers.OrderBy(w => w.Height);
+                PrintTitles();
+                foreach (var w in sortedworkers)
+                {
+                    if ( w.Id == 0)  { }
+                    else { Console.WriteLine(w.Print()); }
+                }
+            }
+            else if (condition == "5")
+            {
+                var sortedworkers = workers.OrderBy(w => w.DateOfBirth);
+                PrintTitles();
+                foreach (var w in sortedworkers)
+                {
+                    if (w.Id == 0)  { }
+                    else { Console.WriteLine(w.Print()); }
+                }
+            }
+            else 
+            {
+                Console.WriteLine("Не верный выбор условия.");
+            }
+            
         }
+
         #endregion
 
 

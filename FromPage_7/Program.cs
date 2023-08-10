@@ -175,34 +175,36 @@ namespace FromPage_7
                                 "Нажмите 4  по росту\n " +
                                 "Нажмите 5 по месту рождения");
 
-                            switch (Console.ReadLine())
-                            {
-                                case "1":
-                                    {
-                                        break;
-                                    }
-                                case "2":
-                                    {
-                                        break;
-                                    }
-                                case "3":
-                                    {
-                                        break;
-                                    }
-                                case "4":
-                                    {
-                                        break;
-                                    }
-                                case "5":
-                                    {
-                                        break;
-                                    }
-                                default:
-                                    {
-                                        Console.WriteLine("Не верный выбор условия сортировки");
-                                        break;
-                                    }
-                            }
+                            rep.SortingByCondition (Console.ReadLine());
+
+                            //switch (Console.ReadLine())
+                            //{
+                            //    case "1":
+                            //        {
+                            //            break;
+                            //        }
+                            //    case "2":
+                            //        {
+                            //            break;
+                            //        }
+                            //    case "3":
+                            //        {
+                            //            break;
+                            //        }
+                            //    case "4":
+                            //        {
+                            //            break;
+                            //        }
+                            //    case "5":
+                            //        {
+                            //            break;
+                            //        }
+                            //    default:
+                            //        {
+                            //            Console.WriteLine("Не верный выбор условия сортировки");
+                            //            break;
+                            //        }
+                            //}
 
                             Console.ReadKey();
                             Console.Clear();
