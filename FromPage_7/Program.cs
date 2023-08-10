@@ -176,46 +176,16 @@ namespace FromPage_7
                                 "Нажмите 5 по месту рождения");
 
                             rep.SortingByCondition (Console.ReadLine());
-
-                            //switch (Console.ReadLine())
-                            //{
-                            //    case "1":
-                            //        {
-                            //            break;
-                            //        }
-                            //    case "2":
-                            //        {
-                            //            break;
-                            //        }
-                            //    case "3":
-                            //        {
-                            //            break;
-                            //        }
-                            //    case "4":
-                            //        {
-                            //            break;
-                            //        }
-                            //    case "5":
-                            //        {
-                            //            break;
-                            //        }
-                            //    default:
-                            //        {
-                            //            Console.WriteLine("Не верный выбор условия сортировки");
-                            //            break;
-                            //        }
-                            //}
-
                             Console.ReadKey();
                             Console.Clear();
                             break;
                         }
 
-                    // Пустой выбор
-                    case "6":
-                        {
-                            break;
-                        }
+                    //// Пустой выбор
+                    //case "6":
+                    //    {
+                    //        break;
+                    //    }
                     // выбор добавления нового сотрудника в список
                     case "9":
                         rep.AddWorker();
