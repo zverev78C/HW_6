@@ -36,7 +36,7 @@ namespace Homework_07
             while (flag == true) 
             {
                 Console.WriteLine("Ежедневник\n");
-                Console.WriteLine($"СегодняЖ { DateTime.Now:dd.MM.yyyy}");
+                Console.WriteLine($"Сегодня: { DateTime.Now:dd.MM.yyyy}");
                 Console.ReadKey();
 
                 flag = false;

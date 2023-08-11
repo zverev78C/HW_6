@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace Homework_07
 {
-    internal class Events
+    class Events
     {
+        /// <summary>
+        /// Место храннеия файла для записи событий
+        /// </summary>
+        private string FileName { get; set; }
+
         #region Свойства события
         private DateTime Date { get;  set; }
 
@@ -36,9 +41,21 @@ namespace Homework_07
             this.Status = false;
         }
 
+
+        #region Методы работы с событиями
         public string Print ()
         {
             return $"({Date:dd.MM.yyyy} {Place} {Name} {Description} {Status})";
         }
+
+        /// <summary>
+        /// Задание место хранения файла с данными событий
+        /// </summary>
+        public void File ()
+        {
+            this.FileName = "Events.txt";
+        }
+        #endregion
+
     }
 }
