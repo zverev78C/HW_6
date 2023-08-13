@@ -97,7 +97,7 @@ namespace FromPage_7
         //          workers.OrderBy(w => w.Id);
         #endregion
 
-        static void Main(string[] args)
+        static void Main()
         {
             string fileName = "list.csv"; // расположение файла
             bool flag = true; // Переменная для закрытия программы

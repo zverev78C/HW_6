@@ -8,7 +8,7 @@ namespace Homework_07
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             #region что надо сделать
             /// Разработать ежедневник.
@@ -33,13 +33,30 @@ namespace Homework_07
             Events[] events;
 
             // обработчик ошибок проверить как работает
-            while (flag == true) 
+            while (flag == true)
             {
                 Console.WriteLine("Ежедневник\n");
-                Console.WriteLine($"Сегодня: { DateTime.Now:dd.MM.yyyy}");
-                Console.ReadKey();
+                Console.WriteLine($"Сегодня: {DateTime.Now:dd.MM.yyyy}");
 
-                flag = false;
+                switch (Console.ReadLine())
+                {
+                    case "1":
+                        break;
+                    case "2":
+                        break;
+                    case "3":
+                        break;
+                    case "4":
+                        break;
+                    case "5":
+                        flag = false;
+                        break;
+                    default:
+                        Console.WriteLine("Не верный выбор дествия.");
+                        Console.ReadKey();
+                        break;
+                }
+               // Console.ReadKey();
             }
         }
     }

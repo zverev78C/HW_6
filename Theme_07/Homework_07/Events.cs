@@ -55,6 +55,8 @@ namespace Homework_07
         {
             this.FileName = "Events.txt";
         }
+
+
         #endregion
 
     }
