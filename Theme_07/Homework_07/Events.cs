@@ -8,10 +8,8 @@ namespace Homework_07
 {
     class Events
     {
-        /// <summary>
-        /// Место храннеия файла для записи событий
-        /// </summary>
-        private string FileName { get; set; }
+        // Место храннеия файла для записи событий
+        private string FileName = "Events.txt";
 
         #region Свойства события
         private DateTime Date { get;  set; }
@@ -48,13 +46,6 @@ namespace Homework_07
             return $"({Date:dd.MM.yyyy} {Place} {Name} {Description} {Status})";
         }
 
-        /// <summary>
-        /// Задание место хранения файла с данными событий
-        /// </summary>
-        public void File ()
-        {
-            this.FileName = "Events.txt";
-        }
 
 
         #endregion

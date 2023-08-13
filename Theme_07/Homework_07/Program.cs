@@ -29,8 +29,7 @@ namespace Homework_07
 
 
             bool flag = true;
-            //var events = new List <Events> ();
-            Events[] events;
+            
 
             // обработчик ошибок проверить как работает
             while (flag == true)
