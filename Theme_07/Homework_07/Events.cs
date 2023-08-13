@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Homework_07
 {
     class Events
     {
-        // Место храннеия файла для записи событий
-        private string FileName = "Events.txt";
 
         #region Свойства события
         private DateTime Date { get;  set; }
@@ -40,15 +34,11 @@ namespace Homework_07
         }
 
 
-        #region Методы работы с событиями
         public string Print ()
         {
             return $"({Date:dd.MM.yyyy} {Place} {Name} {Description} {Status})";
         }
 
-
-
-        #endregion
 
     }
 }

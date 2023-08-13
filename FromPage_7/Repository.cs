@@ -72,7 +72,7 @@ namespace FromPage_7
         {
             using (StreamReader sr = new StreamReader(this.fileName))
             {
-                this.count = 0; // пока не точно но кажется понадобиться
+                this.count = 0; 
                 while (!sr.EndOfStream)
                 {
                     args = sr.ReadLine().Split('#');

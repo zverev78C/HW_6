@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Homework_07
 {
@@ -28,14 +24,16 @@ namespace Homework_07
             #endregion
 
 
-            bool flag = true;
-            
+            bool flag = true; //переменная для завершения программы
+            Mechanics mech = new Mechanics(); //Инициализируем класс механики программы
+            mech.FirstLaunchProgramm();  // проверка на наличие файла в директории
 
-            // обработчик ошибок проверить как работает
             while (flag == true)
             {
                 Console.WriteLine("Ежедневник\n");
-                Console.WriteLine($"Сегодня: {DateTime.Now:dd.MM.yyyy}");
+                Console.WriteLine($"Сегодня: {DateTime.Now:dd.MM.yyyy}\n ");
+                mech.GetAllEvents();
+                mech.MainMenu();
 
                 switch (Console.ReadLine())
                 {
@@ -53,10 +51,11 @@ namespace Homework_07
                     default:
                         Console.WriteLine("Не верный выбор дествия.");
                         Console.ReadKey();
+                        Console.Clear();
                         break;
                 }
-               // Console.ReadKey();
             }
+
         }
     }
 }
