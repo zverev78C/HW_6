@@ -40,6 +40,10 @@ namespace Homework_07
                 "нажмите 5 Для выхода из прогрмаммы\n");
         }
 
+        /// <summary>
+        /// Метод считывания из файла всех событий
+        /// </summary>
+        /// <returns></returns>
         public Events[] GetAllEvents()
         {
             using (StreamReader sr = new StreamReader(this.fileName)) 

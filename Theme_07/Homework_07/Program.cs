@@ -39,7 +39,8 @@ namespace Homework_07
                 {
                     case "1":
                         break;
-                    case "2":
+                    case "2": // Создание новой записи
+
                         break;
                     case "3":
                         break;
