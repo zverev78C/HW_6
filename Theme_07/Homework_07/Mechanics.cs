@@ -10,6 +10,7 @@ namespace Homework_07
         // Место храннеия файла для записи событий
         private readonly string fileName = "Events.txt";
         private int count;
+        private int id;
         Events[] events;
 
         public Mechanics()
@@ -17,13 +18,15 @@ namespace Homework_07
             this.events = new Events[1];
         }
 
-
         /// <summary>
         /// Метод первого запуска программы для создания файла храниения данных   
         /// </summary>
         public void FirstLaunchProgramm()
         {
+            if (File.Exists(fileName) == false)
+            {
             using (StreamWriter sw = new StreamWriter(this.fileName, true)) { };
+            }
         }
 
         /// <summary>
@@ -46,21 +49,77 @@ namespace Homework_07
         /// <returns></returns>
         public Events[] GetAllEvents()
         {
-            using (StreamReader sr = new StreamReader(this.fileName)) 
+            using (StreamReader sr = new StreamReader(this.fileName))
             {
                 count = 0;
                 while (!sr.EndOfStream)
                 {
-                   string[] args = sr.ReadLine().Split('#');
-                    if (count >= this.events.Length) // проверка длины массива 
-                    {
-                        Array.Resize(ref this.events, this.events.Length * 2);
-                    }
-                    events[count] = new Events (Convert.ToDateTime(args[0]),args[1], args[2],args[3]); // добавление работника в массив
-                    this.count++;
+                    string[] args = sr.ReadLine().Split('#');
+                    id = Convert.ToInt32(args[0]); // обновляем актуальный номер записи
+                    AddToArroy (args); // передаем строку для записи в массив
                 }
             }
             return events;
+        }
+
+        public void PrintAllEvents()
+        {
+            if (events[0] == null)
+            {
+                Console.WriteLine("Событий в базе не найденно");
+            }
+            else
+            {
+                foreach (Events e in events)
+                {
+                    Console.WriteLine(e.Print());
+                }
+            }
+            
+        }
+
+        /// <summary>
+        /// метод добавления события
+        /// </summary>
+        /// <returns></returns>
+        public Events[] NewEvent()
+        {
+            string[] args = new string[5];
+
+            args[0] = Convert.ToString(id);
+            Console.WriteLine("Введите дату начала события");
+            args[1] = Console.ReadLine();
+            Console.WriteLine("Введите место проведения события");
+            args[2] = Console.ReadLine();
+            Console.WriteLine("Введите название события");
+            args[3] = Console.ReadLine();
+            Console.WriteLine("Введите описание события");
+            args[4] = Console.ReadLine();
+            AddToArroy( args);
+            return events;
+        }
+
+        /// <summary>
+        /// Метод удаления записи
+        /// </summary>
+        public void DeleteEvent()
+        {
+
+        }
+
+        private void AddToArroy(string[] args)
+        {
+            if (count >= this.events.Length) // проверка длины массива 
+            {
+                Array.Resize(ref this.events, this.events.Length * 2);
+            }
+            this.events[count] = (new Events(
+                        Convert.ToInt32(args[0]), // ID
+                        Convert.ToDateTime(args[1]), // дата события
+                        args[2], // место проведения события
+                        args[3], // название события
+                        args[4])); // добавление события в массив
+            this.count++;
         }
     }
 }

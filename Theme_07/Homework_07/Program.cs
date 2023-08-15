@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Homework_07
 {
@@ -38,15 +39,19 @@ namespace Homework_07
                 switch (Console.ReadLine())
                 {
                     case "1":
+                        Console.Clear();
+                        mech.PrintAllEvents();
+                        Console.ReadKey();
                         break;
                     case "2": // Создание новой записи
-
+                        mech.NewEvent();
+                        Console.Clear();
                         break;
-                    case "3":
+                    case "3": // удаление записи
                         break;
-                    case "4":
+                    case "4": // редактирование записи
                         break;
-                    case "5":
+                    case "5": // выход из программы
                         flag = false;
                         break;
                     default:

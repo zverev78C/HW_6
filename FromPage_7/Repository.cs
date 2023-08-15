@@ -288,7 +288,10 @@ namespace FromPage_7
 
         #region методы для работы с базой 
      
-
+        /// <summary>
+        /// метод сортировки сотрудников по условию 
+        /// </summary>
+        /// <param name="condition"></param>
         public void SortingByCondition (string condition) 
         {
             if (condition == "1") 

@@ -6,9 +6,13 @@ namespace Homework_07
     {
 
         #region Свойства события
+
+        private int ID { get; set; }
+
         private DateTime Date { get;  set; }
 
         private string Place { get; set; }
+
 
         private string Name { get; set; }
 
@@ -24,8 +28,9 @@ namespace Homework_07
         /// <param name="place">Место</param>
         /// <param name="name">Имя</param>
         /// <param name="description">Описание события</param>
-        public Events (DateTime date, string place, string name, string description)
+        public Events (int id, DateTime date, string place, string name, string description)
         {
+            this.ID = id;
             this.Date = date;
             this.Place = place;
             this.Name = name;
@@ -36,7 +41,7 @@ namespace Homework_07
 
         public string Print ()
         {
-            return $"({Date:dd.MM.yyyy} {Place} {Name} {Description} {Status})";
+            return $"{Date:dd.MM.yyyy} {Place} {Name} {Description} {Status}";
         }
 
 
