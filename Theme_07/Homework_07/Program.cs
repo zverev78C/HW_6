@@ -38,7 +38,7 @@ namespace Homework_07
 
                 switch (Console.ReadLine())
                 {
-                    case "1":
+                    case "1": // вывод на экран всех событий в базе данных
                         Console.Clear();
                         mech.PrintAllEvents();
                         Console.ReadKey();
