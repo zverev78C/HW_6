@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Eventing.Reader;
 
 namespace Homework_07
 {
@@ -9,10 +10,11 @@ namespace Homework_07
 
         private int ID { get; set; }
 
-        private DateTime Date { get;  set; }
+        private DateTime Date { get; set; }
+
+        private string DeadLine { get; set; }
 
         private string Place { get; set; }
-
 
         private string Name { get; set; }
 
@@ -21,6 +23,8 @@ namespace Homework_07
         private bool Status { get; set; }
         #endregion
 
+
+
         /// <summary>
         /// Конструктор события
         /// </summary>
@@ -28,22 +32,40 @@ namespace Homework_07
         /// <param name="place">Место</param>
         /// <param name="name">Имя</param>
         /// <param name="description">Описание события</param>
-        public Events (int id, DateTime date, string place, string name, string description)
+        public Events(int id, DateTime date, string place, string name, string description, bool status)
         {
             this.ID = id;
-            this.Date = date;
+            this.Date = date; // добавить дату окончания события
             this.Place = place;
             this.Name = name;
             this.Description = description;
-            this.Status = false;
+            this.DeadLine = Deadline(DateTime.Now);
+            this.Status = status; // Изменить на 4 пункта (действует, грядущее, просрочено)
         }
 
-
-        public string Print ()
+        public string PrintShort()
         {
-            return $"{Date:dd.MM.yyyy} {Place} {Name} {Description} {Status}";
+            string status = this.Status == true ? "выполнено" : "не выполнено";
+            return $"{ID} {Date:dd.MM.yyyy} {Place} {Name} {DeadLine} {status}";
         }
 
+        public string PrintOne()
+        {
+            string status = this.Status == true ? "выполнено" : "не выполнено";
+            return $"{Date:dd.MM.yyyy} {Place}\n \n {Name}\n {Description} \n {DeadLine} {status} ";
+        }
 
+        private string Deadline(DateTime now)
+        {
+            if (Date < now)
+            {
+                return "Впереди";
+            }
+            else if (Date > now)
+            {
+                return "Прошло";
+            }
+            return "Сегодня";
+        }
     }
 }

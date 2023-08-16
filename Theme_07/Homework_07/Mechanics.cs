@@ -72,7 +72,7 @@ namespace Homework_07
             {
                 foreach (Events e in events)
                 {
-                    Console.WriteLine(e.Print());
+                    Console.WriteLine(e.PrintShort());
                 }
             }
             
@@ -84,7 +84,7 @@ namespace Homework_07
         /// <returns></returns>
         public Events[] NewEvent()
         {
-            string[] args = new string[5];
+            string[] args = new string[6];
 
             args[0] = Convert.ToString(id);
             Console.WriteLine("Введите дату начала события");
@@ -95,31 +95,54 @@ namespace Homework_07
             args[3] = Console.ReadLine();
             Console.WriteLine("Введите описание события");
             args[4] = Console.ReadLine();
+            args[5] = Convert.ToString (false);
             AddToArroy( args);
             return events;
         }
 
         /// <summary>
-        /// Метод удаления записи
+        /// Метод редактирование события
+        /// </summary>
+        /// <param name="ID"></param>
+        public void EditEvent(int ID)
+        {
+
+        }
+
+        /// <summary>
+        /// Метод удаления события
         /// </summary>
         public void DeleteEvent()
         {
 
         }
 
+        /// <summary>
+        /// Метод добавления события в массив
+        /// </summary>
+        /// <param name="args"></param>
         private void AddToArroy(string[] args)
         {
             if (count >= this.events.Length) // проверка длины массива 
             {
                 Array.Resize(ref this.events, this.events.Length * 2);
             }
-            this.events[count] = (new Events(
+            this.events[count] = new Events(
                         Convert.ToInt32(args[0]), // ID
                         Convert.ToDateTime(args[1]), // дата события
                         args[2], // место проведения события
                         args[3], // название события
-                        args[4])); // добавление события в массив
+                        args[4], // описание
+                        Convert.ToBoolean (args[5])); // status
             this.count++;
+        }
+
+        /// <summary>
+        /// Метод записи массива в файл
+        /// </summary>
+        public void SaveArroy()
+        {
+
         }
     }
 }
