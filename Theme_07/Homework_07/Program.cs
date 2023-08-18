@@ -32,7 +32,7 @@ namespace Homework_07
 
             while (flag == true)
             {
-                Console.WriteLine("Ежедневник\n");
+                Console.WriteLine("\nЕжедневник\n");
                 Console.WriteLine($"Сегодня: {DateTime.Now:dd.MM.yyyy}\n ");
                 mech.MainMenu();
 
