@@ -8,19 +8,35 @@ namespace Homework_07
 
         #region Свойства события
 
-        private int ID { get; set; }
+        public int ID { get; set; }
 
-        private DateTime Date { get; set; }
+        public DateTime Date { get; set; }
 
-        private string DeadLine { get; set; }
+        public string Place { get; set; }
 
-        private string Place { get; set; }
+        public string Name { get; set; }
 
-        private string Name { get; set; }
+        public string Description { get; set; }
 
-        private string Description { get; set; }
+        public string DeadLine
+        {
+            //get; set;
+            get
+            {
+                if (Date < DateTime.Now)
+                {
+                    return "Прошло"; 
+                }
+                else if (Date > DateTime.Now)
+                {
+                    return "Впереди";
+                }
+                return "Сегодня"; }
+            set
+            { }
+        } //= "не понятно";
 
-        private bool Status { get; set; }
+        public bool Status { get; set; } = false;
         #endregion
 
 
@@ -32,15 +48,15 @@ namespace Homework_07
         /// <param name="place">Место</param>
         /// <param name="name">Имя</param>
         /// <param name="description">Описание события</param>
-        public Events(int id, DateTime date, string place, string name, string description, bool status)
+        public Events(int ID, DateTime Date, string Place, string Name, string Description, string DeadLine, bool Status)
         {
-            this.ID = id;
-            this.Date = date; // добавить дату окончания события
-            this.Place = place;
-            this.Name = name;
-            this.Description = description;
-            this.DeadLine = Deadline(DateTime.Now);
-            this.Status = status; // Изменить на 4 пункта (действует, грядущее, просрочено)
+            this.ID = ID;
+            this.Date = Date; // 
+            this.Place = Place;
+            this.Name = Name;
+            this.Description = Description;
+            this.DeadLine = DeadLine;
+            this.Status = Status; // 
         }
 
         public string PrintShort()
@@ -55,17 +71,5 @@ namespace Homework_07
             return $"{Date:dd.MM.yyyy} {Place}\n \n {Name}\n {Description} \n {DeadLine} {status} ";
         }
 
-        private string Deadline(DateTime now)
-        {
-            if (Date < now)
-            {
-                return "Впереди";
-            }
-            else if (Date > now)
-            {
-                return "Прошло";
-            }
-            return "Сегодня";
-        }
     }
 }

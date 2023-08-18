@@ -28,12 +28,12 @@ namespace Homework_07
             bool flag = true; //переменная для завершения программы
             Mechanics mech = new Mechanics(); //Инициализируем класс механики программы
             mech.FirstLaunchProgramm();  // проверка на наличие файла в директории
+                mech.GetAllEvents();
 
             while (flag == true)
             {
                 Console.WriteLine("Ежедневник\n");
                 Console.WriteLine($"Сегодня: {DateTime.Now:dd.MM.yyyy}\n ");
-                mech.GetAllEvents();
                 mech.MainMenu();
 
                 switch (Console.ReadLine())
@@ -52,6 +52,7 @@ namespace Homework_07
                     case "4": // редактирование записи
                         break;
                     case "5": // выход из программы
+                        mech.SaveArroy();
                         flag = false;
                         break;
                     default:

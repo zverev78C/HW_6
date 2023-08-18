@@ -62,6 +62,9 @@ namespace Homework_07
             return events;
         }
 
+        /// <summary>
+        /// Метод вывода на экран всех событий 
+        /// </summary>
         public void PrintAllEvents()
         {
             if (events[0] == null)
@@ -70,10 +73,11 @@ namespace Homework_07
             }
             else
             {
-                foreach (Events e in events)
+                for (int i = 0; i < count; i++) 
                 {
-                    Console.WriteLine(e.PrintShort());
+                    Console.WriteLine(events[i].PrintShort());
                 }
+                
             }
             
         }
@@ -84,8 +88,8 @@ namespace Homework_07
         /// <returns></returns>
         public Events[] NewEvent()
         {
-            string[] args = new string[6];
-
+            string[] args = new string[7];
+            id++;
             args[0] = Convert.ToString(id);
             Console.WriteLine("Введите дату начала события");
             args[1] = Console.ReadLine();
@@ -95,7 +99,8 @@ namespace Homework_07
             args[3] = Console.ReadLine();
             Console.WriteLine("Введите описание события");
             args[4] = Console.ReadLine();
-            args[5] = Convert.ToString (false);
+            args[5] = "не понятно";
+            args[6] = Convert.ToString (false);
             AddToArroy( args);
             return events;
         }
@@ -103,8 +108,8 @@ namespace Homework_07
         /// <summary>
         /// Метод редактирование события
         /// </summary>
-        /// <param name="ID"></param>
-        public void EditEvent(int ID)
+        /// <param name="ID"> ID события для редактирования</param>
+        public void EditEvent(int ID) // попробовать сделать через индексатор
         {
 
         }
@@ -133,7 +138,8 @@ namespace Homework_07
                         args[2], // место проведения события
                         args[3], // название события
                         args[4], // описание
-                        Convert.ToBoolean (args[5])); // status
+                        args[5], // deadline
+                        Convert.ToBoolean (args[6])); // status
             this.count++;
         }
 
@@ -142,7 +148,27 @@ namespace Homework_07
         /// </summary>
         public void SaveArroy()
         {
+            File.Delete(fileName);
+            string line;
+            for (int i = 0; i < count; i++)
+            {
+                line = $"{events[i].ID}# " +
+                       $"{events[i].Date}#" +
+                       $"{events[i].Place}#" +
+                       $"{events[i].Name}#" +
+                       $"{events[i].Description}#" +
+                       $"{events[i].DeadLine}#" +
+                       $"{events[i].Status}#";
 
+                using (StreamWriter sw = new StreamWriter(fileName, true))// необходимо затирать старую версию файла перед записью нового массива
+                {
+                    sw.WriteLine(line);
+                }
+            }
+            //using (StreamWriter sw = new StreamWriter(fileName)) 
+            //{
+            //    sw.WriteLine(line);
+            //}
         }
     }
 }
